@@ -1,0 +1,1 @@
+String url="jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/DBName.accdb";
