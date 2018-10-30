@@ -46,6 +46,7 @@ public class firstpage extends dataentry implements ActionListener{
 		new firstpage();
 	}
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource()==next){
 			if(deptsub.isSelected()){
 				

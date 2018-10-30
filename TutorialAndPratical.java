@@ -31,9 +31,9 @@ public class TutorialAndPratical extends dataentry{
 			tutoandpra.setFont(new Font("Tahoma",Font.BOLD,14));
 			add(tutoandpra);
 			        
-			academic.setBounds(600,100,200,25);
-			academic.setFont(new Font("Tahoma",Font.BOLD,14));
-			add(academic);         
+			acayearlabel.setBounds(600,100,200,25);
+			acayearlabel.setFont(new Font("Tahoma",Font.BOLD,14));
+			add(acayearlabel);         
 		
 			courselabel.setBounds(50,125,100,25);
 			p1.add(courselabel);

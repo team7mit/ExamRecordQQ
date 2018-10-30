@@ -6,7 +6,7 @@ import javax.swing.*;
 public class ResultOfAllmarks extends dataentry{
 
 	
-	String data[][]={};
+		String data[][]=new String[50][8];
 		protected String column[]={"No","Code","Name","Roll No","Tutorial","Practical","Exam","Remarks"};  
 		
 		JLabel l1=new JLabel();
@@ -24,7 +24,7 @@ public class ResultOfAllmarks extends dataentry{
 		}
 	public ResultOfAllmarks(String semester,String course,String department,String subcode, String Academic){
 		
-		
+		datas();
 	       
 		JTable jt=new JTable(data,column);    
 		          

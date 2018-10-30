@@ -31,9 +31,9 @@ public class Semester extends dataentry{
 		coding.setFont(new Font("Tahoma",Font.BOLD,14));
 		add(coding);
 		        
-		academic.setBounds(600,100,200,25);
-		academic.setFont(new Font("Tahoma",Font.BOLD,14));
-		add(academic);
+		acayearlabel.setBounds(600,100,200,25);
+		acayearlabel.setFont(new Font("Tahoma",Font.BOLD,14));
+		add(acayearlabel);
 		
 		courselabel.setBounds(50,125,100,25);
 		add(courselabel);

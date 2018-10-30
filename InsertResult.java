@@ -1,3 +1,4 @@
+
 package gui;
 
 import java.awt.Font;
@@ -28,9 +29,9 @@ public class InsertResult extends dataentry{
 		//ceit.setFont(new Font("Tahoma",Font.BOLD,14));
 		//p1.add(ceit);
 		
-		academic.setBounds(600,75,200,25);
-		academic.setFont(new Font("Tahoma",Font.BOLD,14));
-		p1.add(academic);
+		acayearlabel.setBounds(600,75,200,25);
+		acayearlabel.setFont(new Font("Tahoma",Font.BOLD,14));
+		p1.add(acayearlabel);
 		add(p1,"Center");          
 	
 		courselabel.setBounds(50,125,100,25);

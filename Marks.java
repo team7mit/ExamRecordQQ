@@ -30,9 +30,9 @@ public class Marks extends dataentry{
 		sturesult.setFont(new Font("Tahoma",Font.BOLD,14));
 		add(sturesult);
 		        
-		academic.setBounds(600,100,200,25);
-		academic.setFont(new Font("Tahoma",Font.BOLD,14));
-		add(academic);
+		acayearlabel.setBounds(600,100,200,25);
+		acayearlabel.setFont(new Font("Tahoma",Font.BOLD,14));
+		add(acayearlabel);
 		
 		stunamelabel.setBounds(50,150,100,25);
 		stunamelabel.setFont(new Font("Tahoma",Font.PLAIN,14));

@@ -68,7 +68,7 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 		
 		f.setTitle("TEAM-7(MIT)");
 		f.setResizable(false);
-		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//f.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		f.setLocation(500,50);
 		f.setSize(500,600);
 		f.setVisible(true);
@@ -79,12 +79,13 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 		
 	}*/
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource()==next){
 			if(radiofirst.isSelected()){
 				new ResultOfAllmarks(radiofirst.getText(),(String)coursefield.getSelectedItem(),deptidfield.getText(),subcodefield.getText(),(String)academicfield.getSelectedItem());
 			}
 			if(radiosecond.isSelected()){
-				//new ResultOfAllmarks(radiosecond.getText());
+				new ResultOfAllmarks(radiosecond.getText(),(String)coursefield.getSelectedItem(),deptidfield.getText(),subcodefield.getText(),(String)academicfield.getSelectedItem());
 			}
 		}
 	if(e.getSource()==cancel){
