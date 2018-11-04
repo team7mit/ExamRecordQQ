@@ -1,0 +1,68 @@
+package model;
+
+public class Marks extends Subject {
+
+	public String papercode;
+	public String exam;
+	public String tutorial;
+	public String practical;
+	public String Total;
+	public String ReExam;
+	public String Semester;
+	
+	public String getPapercode() {
+		return papercode;
+	}
+
+	public void setPapercode(String papercode) {
+		this.papercode = papercode;
+	}
+
+	public String getExam() {
+		return exam;
+	}
+
+	public void setExam(String exam) {
+		this.exam = exam;
+	}
+
+	public String getTutorial() {
+		return tutorial;
+	}
+
+	public void setTutorial(String tutorial) {
+		this.tutorial = tutorial;
+	}
+
+	public String getPractical() {
+		return practical;
+	}
+
+	public void setPractical(String practical) {
+		this.practical = practical;
+	}
+
+	public String getTotal() {
+		return Total;
+	}
+
+	public void setTotal(String total) {
+		this.Total = total;
+	}
+
+	public String getReExam() {
+		return ReExam;
+	}
+
+	public void setReExam(String reExam) {
+		this.ReExam = reExam;
+	}
+
+	public String getSemester() {
+		return Semester;
+	}
+
+	public void setSemester(String semester) {
+		this.Semester = semester;
+	}
+}
