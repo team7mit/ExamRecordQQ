@@ -1,0 +1,20 @@
+public static void updateMarks(Marks marks) throws SQLException{
+		
+		int tutorial=marks.getTutorial();
+		int practical=marks.getPractical();
+		int exam=marks.getExam();
+		int total=marks.getTotal();
+		String id=marks.getStuid();
+		String academic=marks.getAcademic();
+		String subcode=marks.getSubcode();
+		int re=marks.getReExam();
+		 String sql="update Marks set tutorial=" + tutorial + "exam=" + exam + "Total=" + total + "Practical=" + practical + "ReExam=" + re +
+				 " where StuID='"+ id +"' and SubCode='"+subcode+"' and AcaID='"+ academic +"'";
+		sta=cnn.createStatement();
+		int r=sta.executeUpdate(sql);
+		if(r>=1){
+			JOptionPane.showMessageDialog(null,"Update Success:");
+			
+		}
+		else JOptionPane.showMessageDialog(null,"Update Failed");
+	}
