@@ -1,0 +1,52 @@
+
+// major 
+insert into major values('CE','Civil Engineering');
+insert into major values('Arch','Architecture');
+insert into major values('ME','Mechanical Engineering');
+insert into major values('Mc.E','Mechatronic Engineering');
+insert into major values('CEIT','Computer Engineering And Information Technology');
+insert into major values('EP','Electrical Power Engineering');
+insert into major values('EC,'Electrical And Eletronic Engineering');
+insert into major values('Min.E','Mining Engineering');
+insert into major values('Ch.E','Chemical Engineering');
+insert into major values('Bio.Tech','BioTechnology');
+-------------------------------------------------------------------------------------------------------------]
+
+SubCode
+IT-31012
+IT-31014
+IT-31031
+IT-31035
+IT-31041
+IT-31060
+IT-32012
+IT-32014
+IT-32035
+
+
+
+// Subject 
+//CEIT
+insert into subject values('IT-31012','Data Structure and Algorithms','Third Year','First Semester','CEIT');
+insert into subject values('IT-31014','Programming Language III','Third Year','First Semester','CEIT');
+insert into subject values('IT-31031','Eletronic Device','Third Year','First Semester','CEIT');
+insert into subject values('IT-31035','Database Management System I','Third Year','First Semester','CEIT');
+insert into subject values('IT-31041','Opearting System I','Third Year','First Semester','CEIT');
+insert into subject values('IT-31060','Data Communication and Networking I','Third Year','First Semester','CEIT');
+
+insert into subject values('IT-32012','Data Structure and Algorithms II','Third Year','Second Semester','CEIT');
+insert into subject values('IT-32014','Programming Language IV','Third Year','Second Semester','CEIT');
+insert into subject values('IT-32035','Database Management System II','Third Year','Second Semester','CEIT');
+insert into subject values('IT-32060','Data Communication and Networking II','Third Year','Second Semester','CEIT');
+insert into subject values('IT-32044','Microprocessor Programming','Third Year','Second Semester','CEIT');
+insert into subject values('IT-32041','Operating System II','Third Year','Second Semester','CEIT');
+
+//EP
+insert into subject values('EP-32014','Power Electronics II','Third Year','Second Semester','EP');
+insert into subject values('EP-32011','Eletrical Transient','Third Year','Second Semester','EP');
+insert into subject values('EP-32029','Electromagnetic Field II','Third Year','Second Semester','EP');
+insert into subject values('EP-32026','Power Transmission and Distribution II','Third Year','Second Semester','EP');
+
+
+
+//
