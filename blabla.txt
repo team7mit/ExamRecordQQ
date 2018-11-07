@@ -6,7 +6,7 @@ insert into major values('ME','Mechanical Engineering');
 insert into major values('Mc.E','Mechatronic Engineering');
 insert into major values('CEIT','Computer Engineering And Information Technology');
 insert into major values('EP','Electrical Power Engineering');
-insert into major values('EC,'Electrical And Eletronic Engineering');
+insert into major values('EC','Electrical And Eletronic Engineering');
 insert into major values('Min.E','Mining Engineering');
 insert into major values('Ch.E','Chemical Engineering');
 insert into major values('Bio.Tech','BioTechnology');
