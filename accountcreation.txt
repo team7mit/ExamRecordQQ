@@ -1,0 +1,70 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
+
+
+
+public class createuser {
+	
+		static Connection cnn;
+		static ResultSet res;
+		static Statement sta;
+		static String url="jdbc:mysql://localhost/Examination_Records?user=root&password=root";
+
+	public static boolean create(Object object) throws SQLException{
+		boolean check=false;
+		
+		Connect.ConnectDB();//connect to database
+		
+		String sql="insert into User (userid,username,password,userlevel) values (?,?,?,?)";//sql query
+		PreparedStatement ppt=cnn.prepareStatement(sql);
+		
+		String id = null; //get id
+		String name = null;//get username
+		String password = null;//get password
+		String level = null;//get level
+		
+		
+		ppt.setString(1, id);
+		ppt.setString(2, name);
+		ppt.setString(3, password);
+		ppt.setString(4, level);
+		int r=ppt.executeUpdate();
+		
+		
+		
+		if(r>1){
+			Connect.connectionclose();
+			check=true;
+		}
+		else{
+			Connect.connectionclose();
+			check=false;
+		}
+		return check;
+		
+	}
+	//encrypt password
+	public static String encrypt(String strClearText,String strKey) throws Exception{
+		String strData="";
+		
+		try {
+			SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes(),"Blowfish");
+			Cipher cipher=Cipher.getInstance("Blowfish");
+			cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
+			byte[] encrypted=cipher.doFinal(strClearText.getBytes());
+			strData=new String(encrypted);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+		return strData;
+	}
+}
