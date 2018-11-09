@@ -1,0 +1,29 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
+public class Connect {
+	
+	
+	static Connection cnn;
+	static String url="jdbc:mysql://localhost/Examination_Records?user=root&password=root";
+	
+	
+	public static void ConnectDB() throws SQLException{
+		
+		cnn=DriverManager.getConnection(url);
+		System.out.println("Get Connected");
+		
+	}
+	
+	
+	
+	public static void connectionclose() throws SQLException{
+		
+		cnn.close();
+		System.out.println("Connection Closed");
+		
+	}
+	
+}
