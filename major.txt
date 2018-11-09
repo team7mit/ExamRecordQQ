@@ -1,0 +1,48 @@
+public class Major  implements ActionListener {
+JLabel l1,l2;
+JTextField tf1,tf2;
+JButton b1,b2,b3;
+JTable t1;
+JScrollPane sp1;
+Major()
+{
+	JFrame f=new JFrame();
+	l1=new JLabel("Major ID");
+	l2=new JLabel("Major");
+	tf1=new JTextField();
+	tf2=new JTextField();
+	b1=new JButton("DELETE");
+	b2=new JButton("INSERT");
+	b3=new JButton("Update");
+	l1.setBounds(20,50,150,20);
+	l2.setBounds(20,90,150,20);
+	tf1.setBounds(150,50,150,20);
+	tf2.setBounds(150,90,150,20);
+	b1.setBounds(30,150,80,20);
+	b2.setBounds(160,150,80,20);
+	b3.setBounds(280,150,80,20);
+	b1.addActionListener(this);
+	b2.addActionListener(this);
+	b3.addActionListener(this);
+	String columns[]={"Major ID","Major"};
+	String values[][]={};
+	t1=new JTable(values,columns);
+	sp1=new JScrollPane(t1);
+	sp1.setBounds(400,50,300,100);
+	f.setTitle("TEAM-7(MIT)");
+	f.add(l1);f.add(l2);f.add(tf1);f.add(tf2);
+	f.add(b1);f.add(b2);f.add(b3);
+	f.add(sp1);
+	f.setSize(800,300);
+	f.setLayout(null);
+	f.setVisible(true);
+}
+public void actionPerformed(ActionEvent e)
+{
+	
+}
+public static void main(String[]args)
+{
+	new Major();
+}
+}
