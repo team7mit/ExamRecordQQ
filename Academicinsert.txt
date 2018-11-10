@@ -1,0 +1,47 @@
+package dataAccess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import model.Academic;
+
+public class AcademicDA {
+	static Connection conn;
+	static PreparedStatement stmt;
+	static ResultSet res;
+public static boolean AddAcademic(Academic academic) throws SQLException{
+	String id=academic.getAcaid();
+	String year=academic.getAcayear();
+	
+	conn=Connect.ConnectDB();
+	
+	String sql="insert into Academic(Academic_ID,Academic) values(?,?)";
+	stmt=conn.prepareStatement(sql);
+	
+	stmt.setString(1,id);
+	stmt.setString(2,year);
+	
+	
+	int r=stmt.executeUpdate();
+	
+	if(r>=1){
+		
+		Connect.connectionclose(conn);
+		return true;
+		
+	}
+	else {
+		Connect.connectionclose(conn);
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+}
+}
