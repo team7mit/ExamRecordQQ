@@ -1,0 +1,90 @@
+package dataAccess;
+
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
+import model.Student;
+
+public class Stu {
+	static Connection conn;
+public static boolean insert(Student student) throws SQLException{
+	boolean race=false;
+	String id=student.getStuid();
+	String name=student.getStuname();
+	String roll=student.getRollno();
+	String academic=student.getAcaid();
+	String major=student.getMajorId();
+	
+	conn=Connect.ConnectDB();
+	
+	if(show(id,academic,roll))
+	{
+		String sql="insert into student(Student_ID,Student_Name,Major_ID) values(?,?,?)";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setString(1,id);
+		stmt.setString(2,name);
+		stmt.setString(3,major);
+
+		String sqls="insert into student_rollno(Roll_No,Student_ID,Academic_ID) values(?,?,?)";	
+		PreparedStatement stmtt=conn.prepareStatement(sqls);
+		stmtt.setString(1,roll);
+		stmtt.setString(2, id);
+		stmtt.setString(3,academic);
+		if(insert(stmt) && insert(stmtt)){
+			Connect.connectionclose(conn);
+			race=true;
+		}
+		else{
+			Connect.connectionclose(conn);
+			race=false;
+		}
+	}
+	else{
+		race=false;
+	}
+	return race;
+	
+}
+
+public static boolean insert(PreparedStatement stmt) throws SQLException{
+	
+	int r=stmt.executeUpdate();
+	
+	if(r>=1){
+		return true;
+	}
+	else {
+		return false;
+	}	
+}
+public static boolean show(String stuid,String academicid,String rollno) {
+	boolean check=false;
+	String select="select * from Student_RollNo where student_ID IN (select student_ID from student where major_ID='CEIT') order by Roll_No";
+	//conn=Connect.ConnectDB();
+	Statement st;
+	try {
+		st = conn.createStatement();
+		ResultSet res=st.executeQuery(select);
+		while(res.next()){
+			if(stuid.equals(res.getString("Student_ID")) && academicid.equals(res.getString("Academic_ID")) && rollno.equals(res.getString("Roll_No"))){		
+				check=false;
+			}
+			else{
+				check=true;
+			}
+		}
+	
+	}catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Student Exists");
+			e.printStackTrace();
+	}
+	return check;
+	
+}
+}
