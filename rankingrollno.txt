@@ -1,0 +1,51 @@
+package package1;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+public class RollNo1 implements ActionListener{
+		JScrollPane sp1;
+		JTable t1;
+		JButton b1;
+		JPanel p;
+		
+		RollNo1()
+		{
+			JFrame f=new JFrame();
+			f.setTitle("Team-7(MIT)");
+			
+			b1=new JButton("Save");
+			p=new JPanel();
+			String columns[]={"No","Student Name","Previous Roll No","Current Roll No"};
+			String values[][]={};
+			t1=new JTable(values,columns);
+			
+			sp1=new JScrollPane(t1);
+			
+
+			b1.addActionListener(this);
+			
+			f.add(p,BorderLayout.SOUTH);
+			f.add(sp1,BorderLayout.CENTER);
+			p.add(b1);
+			
+			
+			f.setSize(500,500);
+			f.setVisible(true);
+			}
+		public void actionPerformed(ActionEvent e)
+		{
+			
+		}
+		public static void main(String[] args)
+		{
+			new RollNo1();
+		}
+
+	}
+
