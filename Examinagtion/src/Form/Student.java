@@ -3,6 +3,8 @@ package Form;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
 
@@ -15,14 +17,15 @@ import Model.StudentModel;
 
 public class Student extends dataentry implements ActionListener{
 	JLabel studentIDLabel,nameLabel,rollnolabel,academiclabel,majorlabel;
-	JTextField stuIdField,tf2,rollnofield;
-	JButton add,delete,find;
+	static JTextField stuIdField,tf2;
+	static JTextField rollnofield;
+	static JButton add,delete,find;
 	
 	
 	String academicid = null;
 	String majorid=null;
 	
-	JFrame f=new JFrame();
+	static JFrame f=new JFrame();
 	public Student()
 	{
 		
@@ -112,26 +115,31 @@ public class Student extends dataentry implements ActionListener{
 				student.setStuid(stuIdField.getText().toUpperCase());
 				student.setStuname(tf2.getText().toUpperCase());
 				
-				try {
-					boolean check=StudentDA.show(student);
-					
-					if(check){
+				if(checkRollNo()) {
+					try {
+						boolean check=StudentDA.show(student);
 						
-						JOptionPane.showMessageDialog(f," Student ID OR ROLL NO Already EXISTS");
-					}
-					else{
-						boolean mission=StudentDA.insertStudent(student);
-						if(mission){
-							JOptionPane.showMessageDialog(f,"Insert Success");
-							}
+						if(check){
+							
+							JOptionPane.showMessageDialog(f," Student ID OR ROLL NO Already EXISTS");
+						}
 						else{
-							JOptionPane.showMessageDialog(f, "Insert Failed ");
+							boolean mission=StudentDA.insertStudent(student);
+							if(mission){
+								JOptionPane.showMessageDialog(f,"Insert Success");
+								}
+							else{
+								JOptionPane.showMessageDialog(f, "Insert Failed ");
+						}
+						}
+						
+					} catch (SQLException e1) {
+						
+						e1.printStackTrace();
 					}
-					}
-					
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
+				}
+				else {
+					JOptionPane.showMessageDialog(f," Please Choose Correct Major!!! ");
 				}
 			}
 		}
@@ -160,11 +168,59 @@ public class Student extends dataentry implements ActionListener{
 			}
 		}
 		if(e.getSource()==find){
-			StudentModel student=new StudentModel();
-			student.setStuid(stuIdField.getText());
-			student.setAcademicID(academicid);
+			/*if(checkRollNo()) {
+				try {
+					boolean check=StudentDA.show(student);
+					
+					if(check){
+						
+						JOptionPane.showMessageDialog(f," Student ID OR ROLL NO Already EXISTS");
+					}
+					else{
+						boolean mission=StudentDA.insertStudent(student);
+						if(mission){
+							JOptionPane.showMessageDialog(f,"Insert Success");
+							}
+						else{
+							JOptionPane.showMessageDialog(f, "Insert Failed ");
+					}
+					}
+					
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(f,"NOT");
+			}*/
 		}
 	}
+	
+	public static boolean checkRollNo() {
+		boolean create=false;
+		String roll=rollnofield.getText().toUpperCase();
+		String major=majorfield.getSelectedItem().toString();
+		try {
+			StringTokenizer st=new StringTokenizer(roll,".-");
+			while(st.hasMoreTokens()) {
+				String year=st.nextToken();
+				String convo=st.nextToken();
+				String majort=st.nextToken();
+				String rollno=st.nextToken();
+				
+				if(major.equalsIgnoreCase(majort))
+					create=true;
+				
+			}
+		} catch (NoSuchElementException e) {
+			
+			JOptionPane.showMessageDialog(f,roll+" IS NOT APPLICABLE \n Change to eg IV.BE.CEIT-1", " Roll No ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		return create;
+	}
+	
 	public static void main(String[] args)
 	{
 		new Student();
