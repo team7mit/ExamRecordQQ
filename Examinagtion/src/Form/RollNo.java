@@ -3,17 +3,16 @@ package Form;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ColorConvertOp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
@@ -21,12 +20,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import DataAccess.MarkDA;
-import DataAccess.MyCellRenderer;
 import DataAccess.ResultDA;
 import DataAccess.SortingExamMark;
+import DataAccess.SortingNewRollNo;
 import DataAccess.SortingRollNo;
 import Model.StudentModel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class RollNo extends dataentry implements ActionListener{
 
@@ -35,8 +35,11 @@ public class RollNo extends dataentry implements ActionListener{
 	public DefaultTableModel model=new DefaultTableModel();
 	public StudentModel student = new StudentModel();
 	public JButton convert=new JButton("Convert");
-
+	public JRadioButton oldroll=new JRadioButton(" Sort Previous Roll No");
+	public JRadioButton newrolls=new JRadioButton(" Sort New Roll No");
+	public ButtonGroup bg=new ButtonGroup();
 	private JPanel panel;
+	JPanel panel1=new JPanel();
 	JButton ok=new JButton("OK");
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,10 +61,12 @@ public class RollNo extends dataentry implements ActionListener{
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		bg.add(oldroll);
+		bg.add(newrolls);
 		
 		
 		table = new JTable(model);
-		Object[] columns={"No","Name"," Previous Roll"," Current Roll"};
+		Object[] columns={"No","Name"," Previous Roll"," Current Roll"," Marks"};
 		model.setColumnIdentifiers(columns);
 		JScrollPane scrollBar = new JScrollPane(table);
 		frame.getContentPane().add(scrollBar, BorderLayout.CENTER);
@@ -73,10 +78,13 @@ public class RollNo extends dataentry implements ActionListener{
 		panel.add(coursefield);
 		panel.add(ok);
 		ok.addActionListener(this);
-		JPanel panel1=new JPanel();
+		
 		frame.getContentPane().add(panel1, BorderLayout.SOUTH);
+		panel1.add(oldroll);
+		panel1.add(newrolls);
 				panel1.add(convert);
 		convert.addActionListener(this);
+		newrolls.addActionListener(this);
 		Department_And_Subject.addComboBox();
 		
 		
@@ -84,6 +92,7 @@ public class RollNo extends dataentry implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		
+	
 			student.setAcademicID(academicfield.getSelectedItem().toString());
 			student.setMajorID(majorfield.getSelectedItem().toString());
 			student.setCourse(coursefield.getSelectedItem().toString());
@@ -91,7 +100,7 @@ public class RollNo extends dataentry implements ActionListener{
 		if(e.getSource()==ok) {
 			try {
 			model.setRowCount(0);
-			List<StudentModel> list=MarkDA.insertMark(model,student);
+			List<StudentModel> list=MarkDA.insertMark(student);
 			
 			int i=1;
 		for(StudentModel student: list){
@@ -106,6 +115,7 @@ public class RollNo extends dataentry implements ActionListener{
 		
 		
 		if(e.getSource()==convert) {
+			
 			List<StudentModel> rolllist=new ArrayList<StudentModel>();
 			if(model.getRowCount() <= 0) {
 			JOptionPane.showMessageDialog(this, "NO STUDENT IN TABLE!!!!!!");
@@ -144,11 +154,12 @@ public class RollNo extends dataentry implements ActionListener{
 					
 					}
 					
-				List<StudentModel>	newrolllist=SortingExamMark.SortStudent(rolllist);
+					rolllist=SortingExamMark.SortStudent(rolllist);
+				
 				
 				int i=1;
 				model.setRowCount(0);
-					for(StudentModel student1: newrolllist) {
+					for(StudentModel student1: rolllist) {
 						String rollno=student1.getRollno();
 						
 								
@@ -169,15 +180,26 @@ public class RollNo extends dataentry implements ActionListener{
 							}
 		
 							System.out.println("After replace "+year);
-							String newroll=year+"."+convo+"."+major+"-"+String.valueOf(i);
+							String newroll=year+"."+convo+"."+major+"-"+String.valueOf(i++);
 							student1.setNewroll(newroll);
-				
+						
+						//	
+					
 							
-							model.addRow(new Object[] {i,student1.getStuname(),student1.getRollno(),student1.getNewroll()});
-						i++;	
 						}
 					}
-					
+					if(oldroll.isSelected()) {
+					rolllist=SortingRollNo.SortStudent(rolllist);
+					}
+					int j=1;
+					if(newrolls.isSelected()) {
+						rolllist=SortingExamMark.SortStudent(rolllist);
+					}
+					for(StudentModel stu:rolllist) {
+						model.addRow(new Object[] { j++,stu.getStuname(),stu.getRollno(),stu.getNewroll(),stu.getTotal()});
+					}
+
+				
 				} catch (SQLException e1) {
 					
 					e1.printStackTrace();

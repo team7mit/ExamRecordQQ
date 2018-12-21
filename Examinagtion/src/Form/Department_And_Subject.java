@@ -132,21 +132,21 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 			sql.printStackTrace();
 		}
 	}
-	public static void addsubcode(List<StudentModel> list){
+	/*public static void addsubcode(List<StudentModel> list){
 		subcodefield.setEnabled(true);
 		for(StudentModel g1: list){
 					subcodefield.addItem(g1.getSubcode());
 			}
 			
-		}
+		}*/
 	@SuppressWarnings("unchecked")
-	public  void addMajor() throws SQLException{
+	/*public  void addMajor() throws SQLException{
 		List<StudentModel> list=MajorDA.majorcombo();
 		for(StudentModel student: list)
 		{
 			majorfield.addItem(student.getMajorID());
 		}
-	}
+	}*/
 	
 	
 	public static void main(String[] args) {

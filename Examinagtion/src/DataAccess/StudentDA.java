@@ -44,17 +44,6 @@ public class StudentDA {
 		}
 		}
 
-	/*public static void show(String stuid,String academicid,String rollno) throws SQLException{
-	
-	conn=Connect.connectDB();
-	String sql="select * from Student_RollNo where student_ID IN (select student_ID from student where major_ID=?) order by Roll_No";
-		 stmt = conn.prepareStatement(sql);
-		 stmt.setString(1, );
-		ResultSet res=stmt.executeQuery();
-		while(res.next()){
-			System.out.println(res.getString("Student_ID")+"\t"+res.getString("Roll_No")+"\t"+res.getString("Academic_ID"));
-		}
-	}*/
 
 	public static boolean insert(PreparedStatement stmt) throws SQLException{
 		

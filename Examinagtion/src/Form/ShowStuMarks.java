@@ -130,11 +130,7 @@ public class ShowStuMarks extends dataentry implements ActionListener {
 		setVisible(true);
 
 	}
-	
-
-	
-public void actionPerformed(ActionEvent e) {
-		
+	public static void putSubject(ActionEvent e) {
 		if(e.getSource()==coursefield || e.getSource()==majorfield || e.getSource()==semesterfield){
 			
 			Object sem=semesterfield.getSelectedItem();
@@ -147,24 +143,20 @@ public void actionPerformed(ActionEvent e) {
 				semester.setSemester(sem.toString());
 				semester.setMajorID(majors.toString());
 				semester.setCourse(course.toString());
-				try {
-					List<StudentModel> list=SubjectDA.subjectcombo(semester);
-					System.out.println(list);
-					if(subcodefield.getSelectedItem()==null){
-						Department_And_Subject.addsubcode(list);
-					}
-					else{
-						subcodefield.removeAllItems();
-						Department_And_Subject.addsubcode(list);
-					}
-					
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
+				if(subcodefield.getSelectedItem()==null){
+					Department_And_Subject.subjectcode(semester);
+				}
+				else{
+					subcodefield.removeAllItems();
+					Department_And_Subject.subjectcode(semester);
 				}
 				
 			}
 		}
+	}
+public void actionPerformed(ActionEvent e) {
+		putSubject(e);
+		
 		if(e.getSource()==show){
 			if(subcodefield.getSelectedItem()==null){
 				JOptionPane.showMessageDialog(this,"Enter Subcode");

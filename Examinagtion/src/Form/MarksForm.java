@@ -8,26 +8,22 @@ import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-
 import DataAccess.MarkDA;
 import DataAccess.MyCellRenderer;
 import DataAccess.SubjectDA;
-import Model.AcademicModel;
-import Model.CourseModel;
-import Model.MajorModel;
-import Model.SemesterModel;
+
 import Model.StudentModel;
-import Model.SubjectModel;
+
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+
 import java.awt.Font;
+
 
 @SuppressWarnings("serial")
 public class MarksForm extends dataentry implements ActionListener{
 	
-	JFrame frame=new JFrame();
+	static JFrame frame=new JFrame();
 	JPanel panel;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -123,22 +119,14 @@ public class MarksForm extends dataentry implements ActionListener{
 		sub.setSemester(student.getSemester());
 		sub.setMajorID(student.getMajorID());
 		sub.setCourse(student.getCourse());
-		try {
-			subcodefield.setEnabled(true);
-			List<StudentModel> list=SubjectDA.subjectcombo(sub);
-			if(subcodefield.getSelectedItem()==null){
-				
-				Department_And_Subject.addsubcode(list);
-				
-			}
-			else{
-				subcodefield.removeAllItems();
-				Department_And_Subject.addsubcode(list);
-			}
+		if(subcodefield.getSelectedItem()==null){
 			
-		} catch (SQLException e1) {
+			Department_And_Subject.subjectcode(sub);
 			
-			e1.printStackTrace();
+		}
+		else{
+			subcodefield.removeAllItems();
+			Department_And_Subject.subjectcode(sub);
 		}
 		
 		
@@ -157,28 +145,58 @@ public class MarksForm extends dataentry implements ActionListener{
 		setVisible(true);
 		
 	}
-
+	// Check Marks from Table 
+	@SuppressWarnings("finally")
 	public static boolean checkmark(DefaultTableModel model1) {
-		int row=model1.getRowCount();
-		int column=model1.getColumnCount();
-		int tuto;
-		int practical;
-		double total;
-		double exam;
 		boolean check=false;
-for(int i=0;i<row;i++){
-	
-	tuto=Integer.parseInt(model1.getValueAt(i,3).toString());
-	practical=Integer.parseInt(model1.getValueAt(i,4).toString());
-	exam=Integer.parseInt(model1.getValueAt(i, 5).toString()) * 0.8;
-		total=tuto+practical+exam;
-	if( (tuto+practical) > 20 || total > 100 || tuto < 0 || exam < 0 || practical < 0 ) {
-		check = false;
-	}
-	else check= true;
-}
-		return check;
-		
+		try {
+			int row=model1.getRowCount();
+			int column=model1.getColumnCount();
+			int tuto;
+			int practical;
+			double total;
+			double exam;
+			
+			for(int i=0;i<row;i++){
+				int a=0;
+				boolean pass=false;
+				tuto=Integer.parseInt(model1.getValueAt(i,3).toString());
+				practical=Integer.parseInt(model1.getValueAt(i,4).toString());
+				exam=Integer.parseInt(model1.getValueAt(i, 5).toString()) * 0.8;
+				total=tuto+practical+exam;
+				if((tuto+practical)>20) a=1;
+				
+				else if(tuto < 0 || exam < 0 || practical < 0 ) a=2;
+				
+				else if(total > 100) a=3;
+				
+				switch(a) {
+				
+				case 1 : {JOptionPane.showMessageDialog(frame," Tutorial & Practical Marks Exceeding 20 "+(i+1) ,"" ,JOptionPane.ERROR_MESSAGE ); pass=true; break; }
+				
+				case 2 : {JOptionPane.showMessageDialog(frame," Negative Numbers Are Not Allowed " ,"" ,JOptionPane.ERROR_MESSAGE );pass=true; break;}
+				
+				case 3 : {JOptionPane.showMessageDialog(frame," Total Mark  is Exceeding 100 " ,"" ,JOptionPane.ERROR_MESSAGE ); pass=true; break;}
+				
+				case 0: pass=false;
+				
+				default : 
+				}
+				
+				if(pass) { check=false;break;}	
+				else check=true;
+			}
+			} catch (NullPointerException e) {
+				
+			JOptionPane.showMessageDialog(frame,"Insert Mark" ,"" ,JOptionPane.ERROR_MESSAGE );
+				
+			}
+		catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(frame," Use Only Numbers" ,"" ,JOptionPane.ERROR_MESSAGE );
+		}
+			finally {
+				return check;
+			}
 	}
 	
 	public static void getTotalMark(DefaultTableModel model1) {
@@ -209,8 +227,9 @@ for(int i=0;i<row;i++){
 	public static void start() {
 		try {
 			model.setRowCount(0);
+			model.setColumnCount(6);
 			student1.setSubcode(subcodefield.getSelectedItem().toString());
-			List<StudentModel> list=MarkDA.insertMark(model, student1);
+			List<StudentModel> list=MarkDA.insertMark(student1);
 			int i=1;
 			for(StudentModel student: list) {
 				model.addRow(new Object[] {i++,student.getStuname(),student.getRollno()});
@@ -223,16 +242,22 @@ for(int i=0;i<row;i++){
 	}
 public void actionPerformed(ActionEvent e) {
 
+	frame.removeFocusListener(null);
+	
 	if(e.getSource()==subcodefield) {
+		i=1;
 		start();
 	}
 	
 	if(e.getSource()==btnTotal) {
-		if(i==1) {
-		model.addColumn("Total");
-		i++;
-		}
+		
+		if(checkmark(model)) {
+			if(i==1) {
+				model.addColumn("Total");
+				i++;
+			}
 		getTotalMark(model);
+		}
 	}
 	
 
@@ -245,16 +270,13 @@ public void actionPerformed(ActionEvent e) {
 			try {
 				boolean check=MarkDA.insertexamMark(model, student1);
 					if(check)
-						JOptionPane.showMessageDialog(this, "Insert Successfully","Success", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "Insert Successfully","Success", JOptionPane.INFORMATION_MESSAGE);
 					else 
-						JOptionPane.showMessageDialog(this, "Insert Failed Check Again", "Failed", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "Insert Failed Check Again", "Failed", JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				
 				e1.printStackTrace(); 
 			}		
-		}
-		else {
-			JOptionPane.showMessageDialog(this, "Insert Failed Check Again", "Failed", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

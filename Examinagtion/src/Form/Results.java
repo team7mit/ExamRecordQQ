@@ -62,39 +62,6 @@ public class Results extends dataentry implements ActionListener{
 		setSize(getMaximumSize());
 		setVisible(true);
 	}
-	/*public static void checkComboBox(ActionEvent e) {
-		if(e.getSource()==coursefield || e.getSource()==majorfield || e.getSource()==semesterfield){
-			
-			String sem=semesterfield.getSelectedItem().toString();
-			String majors=majorfield.getSelectedItem().toString();
-			String course=coursefield.getSelectedItem().toString();
-			
-			if(sem!=null && majors!=null && course!=null){
-				subcodefield.setEnabled(true);
-				StudentModel semester=new StudentModel();
-				semester.setSemester(sem);
-				semester.setMajorID(majors);
-				semester.setCourse(course);
-				try {
-					List<StudentModel> list=SubjectDA.subjectcombo(semester);
-					System.out.println(list);
-					if(subcodefield.getSelectedItem()==null){
-						Department_And_Subject.addsubcode(list);
-					}
-					else{
-						subcodefield.removeAllItems();
-						Department_And_Subject.addsubcode(list);
-					}
-					
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
-				}
-				
-			}
-			
-		}
-	}*/
 	public static void resetTable(DefaultTableModel model) {
 		column.removeAllElements();
 		column.add("No");
@@ -142,7 +109,7 @@ public void actionPerformed(ActionEvent e) {
 		
 		try {
 			
-			List<StudentModel> list=MarkDA.insertMark(model, student);
+			List<StudentModel> list=MarkDA.insertMark(student);
 			int i=1;
 			for(StudentModel student: list) {
 				model.addRow(new Object[] {i++,student.getStuname(),student.getRollno()});
