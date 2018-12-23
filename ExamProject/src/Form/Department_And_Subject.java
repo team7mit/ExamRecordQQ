@@ -144,10 +144,10 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 	
 	
 	@SuppressWarnings("unchecked")
-	public void subjectcode(SubjectModel model){
+	public static void subjectcode(StudentModel model){
 		try {
-			List<SubjectModel> list=SubjectDA.subjectcombo(model);
-			for(SubjectModel g:list){
+			List<StudentModel> list=SubjectDA.subjectcombo(model);
+			for(StudentModel g:list){
 				subcodefield.addItem(g.getSubcode());
 			}
 		} catch (SQLException sql) {
@@ -187,25 +187,19 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 			
 			if(sem!=null && majors!=null && course!=null){
 				subcodefield.setEnabled(true);
-				SubjectModel semester=new SubjectModel();
+				StudentModel semester=new StudentModel();
 				semester.setSemester(sem.toString());
 				semester.setMajorID(majors.toString());
 				semester.setCourse(course.toString());
-				try {
-					List<SubjectModel> list=SubjectDA.subjectcombo(semester);
-					System.out.println(list);
+				
 					if(subcodefield.getSelectedItem()==null){
-						addsubcode(list);
+						subjectcode(semester);
 					}
 					else{
 						subcodefield.removeAllItems();
-						addsubcode(list);
+						subjectcode(semester);
 					}
 					
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
-				}
 				
 			}
 			

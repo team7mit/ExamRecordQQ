@@ -121,23 +121,17 @@ public class MarksForm extends dataentry implements ActionListener{
 		sub.setSemester(student.getSemester());
 		sub.setMajorID(student.getMajorID());
 		sub.setCourse(student.getCourse());
-		try {
-			subcodefield.setEnabled(true);
-			List<StudentModel> list=SubjectDA.subjectcombo(sub);
+		
 			if(subcodefield.getSelectedItem()==null){
 				
-				Department_And_Subject.addsubcode(list);
+				Department_And_Subject.subjectcode(sub);
 				
 			}
 			else{
 				subcodefield.removeAllItems();
-				Department_And_Subject.addsubcode(list);
+				Department_And_Subject.subjectcode(sub);
 			}
-			
-		} catch (SQLException e1) {
-			
-			e1.printStackTrace();
-		}
+			 
 		
 		
 		btnSave.setBounds(1237, 606, 89, 23);

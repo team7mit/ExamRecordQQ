@@ -737,24 +737,19 @@ JMenuBar mb=new JMenuBar();
 			
 			if(sem!=null && majors!=null && course!=null){
 				subcodefield.setEnabled(true);
-				SubjectModel semester=new SubjectModel();
+				StudentModel semester=new StudentModel();
 				semester.setSemester(sem.toString());
 				semester.setMajorID(majors.toString());
 				semester.setCourse(course.toString());
-				try {
-					List<SubjectModel> list=SubjectDA.subjectcombo(semester);
-					System.out.println(list);
+				
 					if(subcodefield.getSelectedItem()==null){
-						addsubcode(list);
+						Department_And_Subject.subjectcode(semester);
 					}
 					else{
 						subcodefield.removeAllItems();
-						addsubcode(list);
+						Department_And_Subject.subjectcode(semester);
 					}
 					
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
 				}
 				
 			}
@@ -850,6 +845,6 @@ JMenuBar mb=new JMenuBar();
 			student.setAcademicID(academicid);
 		}
 		}
-	}
+	
 
 }
