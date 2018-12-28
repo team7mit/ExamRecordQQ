@@ -1,0 +1,89 @@
+insert into subject values('Ar-31013','Theory of Sturctures I','Third Year','First Semester','Arch');
+insert into subject values('Ar-31016','Environmental Science and Building Technology','First Semester','Arch');
+insert into subject values('Ar-31024','Fundamental Architectural Dseign I','First Semester','Arch',);
+insert into subject values('Ar-31025','Architectural Materials & Construction I','First Semester','Arch',);
+insert into subject values('Ar-31044','History of Architecture(Eastern)','First Semester','Arch',); 
+insert into subject values('CE-31001','Surverying  I','First Semester','Arch',);
+insert into subject values('CE-31019','Architectural Design Studio','First Semester','Arch',);
+insert into subject values('Ar-32013','Theory of Sturctures II','Third Year','Second Semester','Arch');
+insert into subject values('Ar-32016','Environmental Science and Building Technology','Second Semester','Arch');
+insert into subject values('Ar-32024','Fundamental Architectural Dseign II','Second Semester','Arch',);
+insert into subject values('Ar-32025','Architectural Materials & Construction I','Second Semester','Arch',);
+insert into subject values('Ar-32044','History of Architecture(Eastern)','Second Semester','Arch',); 
+insert into subject values('CE-32001','Surverying II','Second Semester','Arch',);
+insert into subject values('CE-32019','Architectural Design Studio','Second Semester','Arch',);
+
+insert into subject values('CE-31005','Geotechnical Engineering','First Semester','CE',);
+insert into subject values('CE-31006','Fluid Mechanics I','First Semester','CE',);
+insert into subject values('CE-31007','Transportation Engineering I','First Semester','CE',);
+insert into subject values('CE-31012','Civil Engineering Drawing','First Semester','CE',);
+insert into subject values('CE-31013','Theory of  Structures I','First Semester','CE',);
+insert into subject values('EM-31005','Engineering Mathematics','First Semester','CE',);
+insert into subject values('Geol-31001','Engineering Geology I','First Semester','CE',);
+insert into subject values('CE-31001,'Surverying I','First Semester','CE',);
+insert into subject values('CE-32005','Geotechnical Engineering','Second Semester','CE',);
+insert into subject values('CE-32006','Fluid Mechanics II','Second Semester','CE',);
+insert into subject values('CE-32007','Transportation Engineering II','Second Semester','CE',);
+insert into subject values('CE-32012','Civil Engineering Drawing','Second Semester','CE',);
+insert into subject values('CE-32013','Theory of  Structures II','Second Semester','CE',);
+insert into subject values('EM-32006','Engineering Mathematics','Second Semester','CE',);
+insert into subject values('Geol-32001','Engineering Geology II','Second Semester','CE',);
+insert into subject values('CE-32001,'Surverying II','Second Semester','CE',);
+
+insert into subject values('IT-31012','Data Structure & Algorithm I','First Semester','CEIT',);
+insert into subject values('IT-31014','Programming Language III','First Semester','CEIT');
+insert into subject values('IT-31031','Electronic Device','First Semester','CEIT');
+insert into subject values('IT-31035','Database Management System I','First Semester','CEIT');
+insert into subject values('IT-31041','Operating System I','First Semester','CEIT');
+insert into subject values('IT-31060','Data Communication and Networking I','First Semester','CEIT');
+insert into subject values('IT-31005','Applied Mathematics','First Semester','CEIT');
+insert into subject values('IT-32012','Data Structure & Algorithm II','Second Semester','CEIT');
+insert into subject values('IT-32014','Programming Language IV','Second Semester','CEIT');
+insert into subject values('IT-32035',Database Management System II','Second Semester','CEIT');
+insert into subject values('IT-32041','Operating System II','Second Semester','CEIT');
+insert into subject values('IT-32060','Data Communication and Networking II','First Semester','CEIT');
+insert into subject values('IT-32005','Applied Mathematics','Second Semester','CEIT');
+insert into subject values('IT-32044','Micro Processor Programmimg','CEIT');
+
+
+insert into subject values('EM-31006','Engineering Mathematics','First Semester','Ch.E');
+insert into subject values('EcE-31031','Applied Electrical Engineering','Firest Semester','Ch.E');
+insert into subject values('Ch.E-31022','Heat Transfer','First Semester','Ch.E');
+insert into subject values('Ch.E-31013','Physical Chemistry','First Semester','Ch.E');
+insert into subject values('ME-31014',Strength of Material I','First Semester','Ch.E');
+insert into subject values(Ch.E-31017','Sunstainable Product Engineering','First Semester','Ch.E');
+insert into subject values('EM-32006','Engineering Mathematics','Second Semester','Ch.E');
+insert into subject values('EcE-32031','Applied Electrical Engineering','Second Semester','Ch.E');
+insert into subject values('Ch.E-32022','Heat Transfer','Second Semester','Ch.E');
+insert into subject values('Ch.E-32013','Physical Chemistry','Second Semester','Ch.E');
+insert into subject values('ME-32014',Strength of Material II','Second Semester','Ch.E');
+insert into subject values(Ch.E-32017','Sunstainable Product Engineering','Second Semester','Ch.E');
+
+insert into subject values('EM-31006','Engineering Mathematics','First Semester','EP');
+insert into subject values('ME-31034','Mechanical Engineering Fundamental I,'First Semester','EP');
+insert into subject values('EP-31014','Power Electronics','First Semester','EP');
+insert into subject values('EP-31011','Electrical Transient','First Semester','EP');
+insert into subject values('EP-31029','Electromagnetic Field I,'First Semester','EP');
+insert into subject values('EP-31026',Power Transmission and Distribution','First Semester','EP');
+insert into subject values('EM-32006','Engineering Mathematics','Second Semester','EP');
+insert into subject values('ME-32034','Mechanical Engineering Fundamental I,'Second Semester','EP');
+insert into subject values('EP-32014','Power Electronics','Second Semester','EP');
+insert into subject values('EP-32011','Electrical Transient','Second Semester','EP');
+insert into subject values('EP-32029','Electromagnetic Field I,'Second Semester','EP');
+insert into subject values('EP-32026',Power Transmission and Distribution','Second Semester','EP');
+
+insert into subject values('IT-51001','English V','First Semester','CEIT',);
+insert into subject values('IT-51026','Digital Image Processing I','First Semester','CEIT');
+insert into subject values('IT-51023','Computer Architecture I','First Semester','CEIT');
+insert into subject values('IT-51010','Wireless and Mobile Communication I','First Semester','CEIT');
+insert into subject values('IT-51033','Artificial Intelligence','First Semester','CEIT');
+insert into subject values('IT-51061','Embedded Systen I','First Semester','CEIT');
+insert into subject values('IT-52001','English V','Second Semester','CEIT',);
+insert into subject values('IT-52026','Digital Image Processing II','Second Semester','CEIT');
+insert into subject values('IT-52023','Computer Architecture II','Second Semester','CEIT');
+insert into subject values('IT-52010','Wireless and Mobile Communication I','Second Semester','CEIT');
+insert into subject values('IT-52033','Artificial Intelligence','Second Semester','CEIT');
+insert into subject values('IT-52061','Embedded Systen II','Second Semester','CEIT');
+
+
+
