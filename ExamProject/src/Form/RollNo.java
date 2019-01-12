@@ -23,12 +23,18 @@ import java.awt.BorderLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import DataAccess.AcademicDA;
+import DataAccess.MajorDA;
 import DataAccess.MarkDA;
 import DataAccess.ResultDA;
 import DataAccess.SortingExamMark;
+import DataAccess.SubjectDA;
+import Model.AcademicModel;
+import Model.CourseModel;
+import Model.MajorModel;
 import Model.StudentModel;
 
-public class RollNo extends dataentry implements ActionListener{
+public class RollNo extends Home implements ActionListener{
 
 	private JFrame frame;
 	JMenuBar mb=new JMenuBar();
@@ -38,11 +44,11 @@ public class RollNo extends dataentry implements ActionListener{
 	private static JTable table;
 	public DefaultTableModel model=new DefaultTableModel();
 	public StudentModel student = new StudentModel();
-	public JButton convert=new JButton("Convert");
+	public static JButton convert=new JButton("Convert");
 
 	private JPanel panel;
-	JButton ok=new JButton("OK");
-	public static void main(String[] args) {
+	//static JButton ok=new JButton("OK");
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -54,8 +60,54 @@ public class RollNo extends dataentry implements ActionListener{
 			}
 		});
 	}
-	public RollNo() {
+*/	public RollNo() {
 		initialize();
+	}
+	public static void UpdateRollNos(){
+		sortRollno.addActionListener(new ActionListener(){
+
+			
+			public void actionPerformed(ActionEvent e1) {
+				
+				insertdata.removeAll();
+				insertdata.validate();
+				insertdata.repaint();
+				
+				c.add(insertdata,BorderLayout.CENTER);
+				insertdata.setLayout(null);
+				
+				acayearlabel.setBounds(50,50,90,25);
+				insertdata.add(acayearlabel);
+				academicfield.setBounds(150,50,150,25);
+				insertdata.add(academicfield);
+				
+				majornamelabel.setBounds(50,100,90,25);
+				insertdata.add(majornamelabel);
+				majorfield.setBounds(150,100,150,25);
+				insertdata.add(majorfield);
+				
+				courselabel.setBounds(50,150,90,25);
+				insertdata.add(courselabel);
+				coursefield.setBounds(150,150,150,25);
+				insertdata.add(coursefield);
+				
+				ok.setBounds(100,300,150,30);
+				insertdata.add(ok);
+				convert.addActionListener(this);
+				Department_And_Subject.addComboBox();
+				ok.addActionListener(new ActionListener(){
+
+					
+					public void actionPerformed(ActionEvent n) {
+						new RollNo();
+						
+					}
+					
+				});
+				
+			}
+			
+		});
 	}
 	private void initialize() {
 		frame = new JFrame();
@@ -69,13 +121,14 @@ public class RollNo extends dataentry implements ActionListener{
 		model.setColumnIdentifiers(columns);
 		JScrollPane scrollBar = new JScrollPane(table);
 		frame.getContentPane().add(scrollBar, BorderLayout.CENTER);
-		
+		frame.getContentPane().add(convert, BorderLayout.SOUTH);
 		panel = new JPanel();
 		
 		goback.addActionListener(this);
 		file.add(goback);
 		mb.add(file);
 		frame.add(mb,BorderLayout.NORTH);
+		frame.setVisible(true);
 		
 	}
 	
@@ -92,7 +145,7 @@ public class RollNo extends dataentry implements ActionListener{
 		if(e.getSource()==ok) {
 			try {
 			model.setRowCount(0);
-			List<StudentModel> list=MarkDA.insertMark(model,student);
+			List<StudentModel> list=MarkDA.insertMark(student);
 			
 			int i=1;
 		for(StudentModel student: list){

@@ -7,7 +7,6 @@ public class MarkModel extends SubjectModel{
 	public int exam;
 	public int reExam;
 	public int total;
-	public String subCode;
 	public String academicID;
 	public String rollno;
 	public String majorID;
@@ -40,12 +39,6 @@ public class MarkModel extends SubjectModel{
 	}
 	public void setTotal(int total) {
 		this.total = total;
-	}
-	public String getSubCode() {
-		return subCode;
-	}
-	public void setSubCode(String subCode) {
-		this.subCode = subCode;
 	}
 	public String getAcademicID() {
 		return academicID;

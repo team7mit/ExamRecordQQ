@@ -23,7 +23,7 @@ import Model.SubjectModel;
 @SuppressWarnings("serial")
 public class Department_And_Subject extends dataentry implements ActionListener{
 	
-	private JPanel panel=new JPanel();
+	/*private JPanel panel=new JPanel();
 	JButton news1=new JButton("NEW");
 	JButton news2=new JButton("NEW");
 	JButton news3=new JButton("NEW");
@@ -143,11 +143,63 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 	}
 	
 	
+	@SuppressWarnings("unchecked")*/
+	
+	public static void addComboBox() {
+		try {
+		
+			List<AcademicModel> list=AcademicDA.combo();
+			academicfield.removeAllItems();
+			for(AcademicModel g:list){
+				academicfield.addItem(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			List<MajorModel> list=MajorDA.majorcombo();
+			majorfield.removeAllItems();
+			for(MajorModel g: list){
+				majorfield.addItem(g.getMajorID());
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			
+		List<CourseModel> list= SubjectDA.coursecombo();
+		coursefield.removeAllItems();
+			for(CourseModel g:list){
+				coursefield.addItem(g.getCourse());
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+				
+		
+		try {
+			List<SubjectModel> list = SubjectDA.semestercombo();
+			semesterfield.removeAllItems();
+			for(SubjectModel g: list){
+				semesterfield.addItem(g.getSemester());
+			}
+		} catch (SQLException e1) {
+		
+			e1.printStackTrace();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
+	
 	public static void subjectcode(StudentModel model){
 		try {
 			List<StudentModel> list=SubjectDA.subjectcombo(model);
-			for(StudentModel g:list){
+			for(SubjectModel g:list){
 				subcodefield.addItem(g.getSubcode());
 			}
 		} catch (SQLException sql) {
@@ -171,12 +223,12 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 		new Department_And_Subject();
 		
 	}
-	public static void addsubcode(List<SubjectModel> list){
+	/*public static void addsubcodeList<StudentModel> list){
 		for(SubjectModel g1: list){
 					subcodefield.addItem(g1);
 			}
 			
-		}
+		}*/
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource()==coursefield || e.getSource()==majorfield || e.getSource()==semesterfield){
@@ -191,58 +243,24 @@ public class Department_And_Subject extends dataentry implements ActionListener{
 				semester.setSemester(sem.toString());
 				semester.setMajorID(majors.toString());
 				semester.setCourse(course.toString());
-				
+				try {
+					List<StudentModel> list=SubjectDA.subjectcombo(semester);
+					System.out.println(list);
 					if(subcodefield.getSelectedItem()==null){
-						subjectcode(semester);
-					}
+						subjectcode(semester);				}
 					else{
 						subcodefield.removeAllItems();
 						subjectcode(semester);
 					}
 					
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}
 				
 			}
 			
 		}
-	if(e.getSource()==cancel){
-		f.dispose();
-	}
-		
-	
-	if(e.getSource()==news1){
-	  try {
-		new Academic();
-	} catch (Exception e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}
-	}
-	if(e.getSource()==news2){
-		new Major();
-	}
-	if(e.getSource()==news3){
-		new Subject();
-	}
-	
-	
-	if(e.getSource()==next){
-		if(subcodefield.getSelectedItem()==null){
-			JOptionPane.showMessageDialog(panel, "Insert Subject");
-		}
-		else{
-			StudentModel student=new StudentModel();
-			student.setAcademicID(academicfield.getSelectedItem().toString());
-			student.setSemester(semesterfield.getSelectedItem().toString());
-			student.setCourse(coursefield.getSelectedItem().toString());
-			student.setMajorID(majorfield.getSelectedItem().toString());
-			
-			//SemesterModel sem=(SemesterModel) semesterfield.getSelectedItem();
-		//	MajorModel majors=(MajorModel) majorfield.getSelectedItem();
-			//CourseModel course=(CourseModel) coursefield.getSelectedItem();
-			
-			new MarksForm(student);
-		}
-	}
 	}
 	
 

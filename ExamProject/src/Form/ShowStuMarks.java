@@ -1,5 +1,6 @@
 package Form;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -22,15 +23,15 @@ import Model.StudentModel;
 import Model.SubjectModel;
 
 @SuppressWarnings("serial")
-public class ShowStuMarks extends dataentry implements ActionListener {
+public class ShowStuMarks extends Home implements ActionListener {
 	
 	public static JTable table;
 	public static DefaultTableModel model;
 	
-	JButton show=new JButton("Show Marks");
+	static JButton show=new JButton("Show Marks");
 	
 	@SuppressWarnings("unchecked")
-	public ShowStuMarks(){
+	/*public ShowStuMarks(){
 		
 		setTitle("TEAM-7(MIT)");
 		setLayout(null);
@@ -79,46 +80,8 @@ public class ShowStuMarks extends dataentry implements ActionListener {
 		jsp.setBounds(350,50,1000,600);
 		add(jsp);
 		table.setCellSelectionEnabled(false);
-		try {
-			List<AcademicModel> list=AcademicDA.combo();
-			for(AcademicModel g:list){
-				academicfield.addItem(g.academicID);
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
 		
-		try {
-			List<MajorModel> list=MajorDA.majorcombo();
-			for(MajorModel g: list){
-				majorfield.addItem(g.majorID);
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		try {
-			
-		List<CourseModel> list= SubjectDA.coursecombo();
-			for(CourseModel g:list){
-				coursefield.addItem(g);
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-				
-		try {
-			List<SubjectModel> list = SubjectDA.semestercombo();
-			for(SubjectModel g: list){
-				semesterfield.addItem(g.semester);
-			}
-		} catch (SQLException e1) {
-		
-			e1.printStackTrace();
-		}
+		//Department_And_Subject.addComboBox();
 		
 		semesterfield.addActionListener(this);
 		majorfield.addActionListener(this);
@@ -128,6 +91,57 @@ public class ShowStuMarks extends dataentry implements ActionListener {
 		setExtendedState(MAXIMIZED_BOTH);
 		setVisible(true);
 
+	}*/
+	
+public static void ShowStudentMark(){
+		
+		showStuMarks.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent arg) {
+				
+				
+				insertdata.removeAll();
+				insertdata.validate();
+				insertdata.repaint();
+				
+				c.add(insertdata,BorderLayout.CENTER);
+				insertdata.setLayout(null);
+				
+
+				acayearlabel.setBounds(50,50,90,25);
+				insertdata.add(acayearlabel);
+				academicfield.setBounds(150,50,150,25);
+				insertdata.add(academicfield);
+				
+				majornamelabel.setBounds(50,100,90,25);
+				insertdata.add(majornamelabel);
+				majorfield.setBounds(150,100,150,25);
+				insertdata.add(majorfield);
+				
+				courselabel.setBounds(50,150,90,25);
+				insertdata.add(courselabel);
+				coursefield.setBounds(150,150,150,25);
+				insertdata.add(coursefield);
+				
+				semester.setBounds(50,200,150,25);
+				insertdata.add(semester);	
+				semesterfield.setBounds(150,200,150,25);
+				insertdata.add(semesterfield);
+				
+				subcodelabel.setBounds(50,250,90,25);
+				insertdata.add(subcodelabel);
+				subcodefield.setBounds(150,250,150,25);
+				insertdata.add(subcodefield);
+				
+				show.setBounds(100,300,150,30);
+				insertdata.add(show);
+				
+				subcodefield.setMaximumRowCount(3);
+				Department_And_Subject.addComboBox();
+				
+			}
+		});
 	}
 	@SuppressWarnings("unchecked")
 	public static void addsubcode(List<SubjectModel> list){
@@ -138,31 +152,7 @@ public class ShowStuMarks extends dataentry implements ActionListener {
 		}
 	
 public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource()==coursefield || e.getSource()==majorfield || e.getSource()==semesterfield){
-			
-			Object sem=semesterfield.getSelectedItem();
-			Object majors=majorfield.getSelectedItem();
-			Object course=coursefield.getSelectedItem();
-			
-			if(sem!=null && majors!=null && course!=null){
-				subcodefield.setEnabled(true);
-				StudentModel semester=new StudentModel();
-				semester.setSemester(sem.toString());
-				semester.setMajorID(majors.toString());
-				semester.setCourse(course.toString());
-				
-					if(subcodefield.getSelectedItem()==null){
-						Department_And_Subject.subjectcode(semester);
-					}
-					else{
-						subcodefield.removeAllItems();
-						Department_And_Subject.subjectcode(semester);
-					}
-					
-				} 
-				
-		}
+	
 		if(e.getSource()==show){
 			if(subcodefield.getSelectedItem()==null){
 				JOptionPane.showMessageDialog(this,"Enter Subcode");
@@ -173,7 +163,7 @@ public void actionPerformed(ActionEvent e) {
 			table.setEnabled(false);
 			StudentModel student=new StudentModel();
 			
-		student.setAcademicID(academicfield.getSelectedItem().toString());
+		student.setAcademicID(academicfield.getSelectedItem().toString());//change
 		student.setMajorID(majorfield.getSelectedItem().toString());
 		student.setSubcode(subcodefield.getSelectedItem().toString());
 		
@@ -193,7 +183,4 @@ public void actionPerformed(ActionEvent e) {
 		}
 		}
 }
-	public static void main(String[] args) {
-		new ShowStuMarks();
-	}
 }

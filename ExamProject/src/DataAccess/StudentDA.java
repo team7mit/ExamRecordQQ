@@ -11,6 +11,8 @@ import DataAccess.Connect;
 public class StudentDA {
 	
 	static Connection conn;
+	static PreparedStatement stmt;
+	
 	public static boolean insertStudent(StudentModel student) throws SQLException{
 		
 		//Getting values from object
@@ -19,11 +21,10 @@ public class StudentDA {
 		String roll=student.getRollno();
 		String academic=student.getAcademicID();
 		String major=student.getMajorID();
-		
 		conn=Connect.connectDB();
 		
 		String sql="insert into student(Student_ID,Student_Name,Major_ID) values(?,?,?)";
-		PreparedStatement stmt=conn.prepareStatement(sql);
+		 stmt=conn.prepareStatement(sql);
 		stmt.setString(1,id);
 		stmt.setString(2,name);
 		stmt.setString(3,major);
@@ -43,15 +44,6 @@ public class StudentDA {
 		}
 		}
 
-	public static void show(String stuid,String academicid,String rollno) throws SQLException{
-	String select="select * from Student_RollNo where student_ID IN (select student_ID from student where major_ID='CEIT') order by Roll_No";
-	conn=Connect.connectDB();
-		Statement st = conn.createStatement();
-		ResultSet res=st.executeQuery(select);
-		while(res.next()){
-			System.out.println(res.getString("Student_ID")+"\t"+res.getString("Roll_No")+"\t"+res.getString("Academic_ID"));
-		}
-	}
 
 	public static boolean insert(PreparedStatement stmt) throws SQLException{
 		
@@ -94,11 +86,11 @@ public class StudentDA {
 		conn=Connect.connectDB();
 	
 		boolean check=false;
-		String select="select * from Student_RollNo where student_ID IN (select student_ID from student where major_ID='CEIT') order by Roll_No";
+		String select="select * from Student_RollNo where student_ID IN (select student_ID from student where major_ID=?) order by Roll_No";
 
-		Statement st;
-		st = conn.createStatement();
-		ResultSet res=st.executeQuery(select);
+		stmt=conn.prepareStatement(select);
+		stmt.setString(1, student.getMajorID());
+		ResultSet res=stmt.executeQuery();
 		while(res.next()){
 			
 			if(id.equals(res.getString("Student_ID")) || academic.equals(res.getString("Academic_ID")) && roll.equals(res.getString("Roll_No"))){		

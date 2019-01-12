@@ -10,6 +10,7 @@ import javax.swing.table.TableModel;
 
 import DataAccess.MajorDA;
 import Model.MajorModel;
+import Model.StudentModel;
 
 public class Major extends JFrame implements ActionListener{
 	
@@ -102,7 +103,7 @@ public class Major extends JFrame implements ActionListener{
 			String id=tf1.getText();
 			String name=tf2.getText();
 			
-			MajorModel major=new MajorModel(id, name);
+			StudentModel major=new StudentModel();
 			major.setMajorID(id);
 			major.setMajorname(name);
 			

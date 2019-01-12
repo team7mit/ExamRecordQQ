@@ -5,16 +5,6 @@ public class AcademicModel {
 	public String academicID;
 	public String academic;
 	
-	
-	public AcademicModel(){
-		
-	}
-	public AcademicModel(String acaid, String academic) {
-		
-		this.academicID=acaid;
-		this.academic=academic;
-		
-	}
 	public String getAcademicID() {
 		return academicID;
 	}

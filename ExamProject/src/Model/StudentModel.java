@@ -7,16 +7,17 @@ public class StudentModel extends MarkModel{
 	 public String rollno;
 	 public String newroll;
 
+	public String getNewroll() {
+		return newroll;
+	}
+
+	public void setNewroll(String newroll) {
+		this.newroll = newroll;
+	}
 
 	public String getStuid() {
 	 	return student_id;
 	 }
-	public String getNewroll() {
-		return newroll;
-	}
-	public void setNewroll(String newroll) {
-		this.newroll = newroll;
-	}
 
 	 public void setStuid(String stuid) {
 	 	this.student_id = stuid;
@@ -37,6 +38,8 @@ public class StudentModel extends MarkModel{
 	 public void setRollno(String rollno) {
 	 	this.rollno = rollno;
 	 }
+
+	
 	
 	
 }

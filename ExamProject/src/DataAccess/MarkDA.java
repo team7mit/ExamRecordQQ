@@ -35,9 +35,9 @@ public class MarkDA {
 			
 			String roll=(String) model.getValueAt(r,2);
 			int tuto=Integer.parseInt((String)model.getValueAt(r,3));
-			int exam=Integer.parseInt((String)model.getValueAt(r,4));
-			int practical=Integer.parseInt((String)model.getValueAt(r,5));
-			int total=tuto+exam+practical;
+			int practical=Integer.parseInt((String)model.getValueAt(r,4));
+			int exam=Integer.parseInt((String)model.getValueAt(r,5));
+			int total=(int)(tuto+practical+exam*0.8);
 			
 			
 			pst.setInt(1, tuto);
@@ -71,11 +71,12 @@ public class MarkDA {
 	//Retrieve student name and roll no from database to insert mark table
 	
 	//
-public static  List<StudentModel> insertMark(DefaultTableModel model,StudentModel data) throws SQLException{
+public static List<StudentModel> insertMark(StudentModel data) throws SQLException{
 	
 	String academic=data.getAcademicID();
 	String major=data.getMajorID();
 	String course=data.getCourse();
+	System.out.println(course);
 	// replacing String to corresponding codes
 	course=course.replaceAll("First Year","I%")
 			.replaceAll("Second Year", "II%")
@@ -115,14 +116,101 @@ public static  List<StudentModel> insertMark(DefaultTableModel model,StudentMode
 	
 	}
 	List<StudentModel> list=SortingRollNo.SortStudent(studentlist);
-	int i=1;
-	for(StudentModel student: list){
-		model.addRow(new Object[]{i,student.getStuname(),student.getRollno()});
-		i++;
-	}
-	//return false;
 	Connect.connectionclose(conn);
 	return list;
+}
+public static List<StudentModel> getReStudent(StudentModel data) throws SQLException{
+	
+	String academic=data.getAcademicID();
+	String major=data.getMajorID();
+	
+	String subject=data.getSubcode();
+	
+	
+	conn=Connect.connectDB();
+		
+	String sql1="select distinct student.student_name,student_rollno.roll_no "
+			+ " from student,student_rollno"
+			+ " where roll_no in "
+			+ " (select marks.roll_no from marks "
+			+ "where subject_code=? "
+			+ "and marks.total < 60 "
+			+ "and major_id=?"
+			+ " and Academic_ID=?)"
+			+ " and student.student_id=student_rollno.student_id";
+	
+	PreparedStatement stmt=conn.prepareStatement(sql1);
+	
+	
+	stmt.setString(1,subject);
+	stmt.setString(2, major);
+	stmt.setString(3,academic);
+	
+	
+	
+	//Statement st=conn.createStatement();
+	ResultSet res=stmt.executeQuery();
+	
+	List<StudentModel> studentlist=new ArrayList<StudentModel>();
+	while(res.next()){
+		StudentModel student=new StudentModel();
+		student.setStuname(res.getString("Student_Name"));
+		student.setRollno(res.getString("Roll_No"));
+		studentlist.add(student);
+	
+	}
+	List<StudentModel> list=SortingRollNo.SortStudent(studentlist);
+	Connect.connectionclose(conn);
+	return list;
+	
+	
+}
+public static boolean reInsert(DefaultTableModel model,StudentModel student) throws SQLException {
 
+	String academic=student.academicID;
+	String major=student.majorID;
+	String subject=student.subcode;
+	
+	
+	int rows=model.getRowCount();
+	
+	conn=Connect.connectDB();
+	String sql="update marks set ReExam=?"
+			+ " where academic_ID=?"
+			+ " and major_ID=?"
+			+ " and subject_code=?"
+			+ " and roll_no=?";
+	PreparedStatement pst=conn.prepareStatement(sql);
+	for(int r=0;r<rows;r++){
+		
+		String roll=(String) model.getValueAt(r,2);
+		int reExam=Integer.parseInt((String)model.getValueAt(r,3));
+		
+		if(reExam >= 50) reExam=50;
+		
+		pst.setInt(1, reExam);
+		pst.setString(2, academic);
+		pst.setString(3,major);
+		pst.setString(4, subject);
+		pst.setString(5, roll);
+	
+		
+		pst.addBatch();
+	}
+	boolean check=false;
+try {
+	int[] r=pst.executeBatch();
+	
+	for(int i=0;i<r.length;i++){
+		if(r[i]>-1)
+			check=true;
+	}
+
+} catch (SQLException e) {
+	e.printStackTrace();
+}	
+System.out.println(check);
+		Connect.connectionclose(conn);
+		return check;
 }
 }

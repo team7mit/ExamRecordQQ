@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import Model.MajorModel;
+import Model.StudentModel;
 import DataAccess.Connect;
 
 
@@ -97,11 +98,13 @@ public class MajorDA {
 			
 			String id=r.getString("Major_ID");
 			String year=r.getString("Major");
-			MajorModel m=new MajorModel(id,year);
+			StudentModel m=new StudentModel();
+			m.setMajorID(id);
+			m.setMajorname(year);
 			list.add(m);
 			
+			System.out.println(m.getMajorID()+"L");
 		}
-		System.out.println(list);
 		Connect.connectionclose(conn);
 		return list;
 	}

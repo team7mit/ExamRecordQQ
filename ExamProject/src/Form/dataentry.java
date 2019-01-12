@@ -11,7 +11,7 @@ public class dataentry extends JFrame{
 		//public JLabel academic=new JLabel(ss+" Academic Year");
 		public JLabel coding=new JLabel("Coding Marks");
 		public JLabel sturesult=new JLabel("Student Result");
-		public JLabel tutoandpra=new JLabel("Tutorial and Pratical Marks");
+		public JLabel tutoandpra=new JLabel("Tutorial and Practical Marks");
 		
 		
 		JTable table=new JTable();
@@ -23,14 +23,14 @@ public class dataentry extends JFrame{
 		JLabel stunamelabel = new JLabel("Student Name");
 		JLabel rollnolabel  = new JLabel("Roll No");
 		JLabel stuidlabel   = new JLabel("Student ID");
-		JLabel majornamelabel  = new JLabel("Major");
-		JLabel courselabel  = new JLabel("Course");
-		JLabel acayearlabel      = new JLabel("Academic Year");
-		JLabel subcodelabel=new JLabel("Subject Code");
-		JLabel firstsemester=new JLabel("First Semester");
-		JLabel secondsemester=new JLabel("Second Semester");
-		JLabel subjectnamelabel=new JLabel("Subject Name");
-		JLabel semester=new JLabel("Semester");
+		static JLabel majornamelabel  = new JLabel("Major");
+		static JLabel courselabel  = new JLabel("Course");
+		static JLabel acayearlabel      = new JLabel("Academic Year");
+		static JLabel subcodelabel=new JLabel("Subject Code");
+		static JLabel firstsemester=new JLabel("First Semester");
+		static JLabel secondsemester=new JLabel("Second Semester");
+		static JLabel subjectnamelabel=new JLabel("Subject Name");
+		static JLabel semester=new JLabel("Semester");
 		
 		//RadioButton
 		JRadioButton radiofirst  = new JRadioButton("First Semester");

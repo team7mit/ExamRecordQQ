@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import Form.dataentry;
 import Model.MajorModel;
+import Model.StudentModel;
 @SuppressWarnings("serial")
 public class Department_And_SubjectDA extends dataentry{
 	public Department_And_SubjectDA() {
@@ -23,10 +24,10 @@ public ArrayList<String> getMajor() throws SQLException{
 		stmt=conn.prepareStatement(sql);
 		res=stmt.executeQuery();	
 		
-		MajorModel mm;
+
 		
 		while(res.next()){
-			mm=new MajorModel(res.getString("Major_ID"));
+			StudentModel mm=new StudentModel();
 			list.add(mm.getMajorID());
 		}
 		return list;

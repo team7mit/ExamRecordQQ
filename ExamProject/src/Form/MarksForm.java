@@ -131,7 +131,7 @@ public class MarksForm extends dataentry implements ActionListener{
 				subcodefield.removeAllItems();
 				Department_And_Subject.subjectcode(sub);
 			}
-			 
+			
 		
 		
 		btnSave.setBounds(1237, 606, 89, 23);
@@ -202,7 +202,7 @@ for(int i=0;i<row;i++){
 		try {
 			model.setRowCount(0);
 			student1.setSubcode(subcodefield.getSelectedItem().toString());
-			List<StudentModel> list=MarkDA.insertMark(model, student1);
+			List<StudentModel> list=MarkDA.insertMark(student1);
 			int i=1;
 			for(StudentModel student: list) {
 				model.addRow(new Object[] {i++,student.getStuname(),student.getRollno()});

@@ -7,9 +7,8 @@ import java.util.StringTokenizer;
 
 import Model.StudentModel;
 
-public class SortingRollNo {
-	//Sort Students By Roll_NOs
-	public static List<StudentModel> SortStudent(List<StudentModel> StudentList){
+public class SortingNewRollNo {
+public static List<StudentModel> SortStudent(List<StudentModel> StudentList){
 		
 		
 		Comparator<StudentModel> com=new Comparator<StudentModel>(){
@@ -33,7 +32,7 @@ public class SortingRollNo {
 	// Getting RollNo
 	public static int sortstudent(StudentModel student){
 		int roll=0;
-		StringTokenizer st=new StringTokenizer(student.getRollno(),"-");
+		StringTokenizer st=new StringTokenizer(student.getNewroll(),"-");
 		while(st.hasMoreTokens()){
 		String s=st.nextToken();
 		roll=Integer.parseInt(st.nextToken());

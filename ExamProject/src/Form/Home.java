@@ -31,11 +31,13 @@ JMenuBar mb=new JMenuBar();
 	
 	JMenu home=new JMenu("Home");
 	JMenuItem insert=new JMenuItem("Insert");
+	JMenuItem reMarksInsert=new JMenuItem("ReExam Marks");
 	JMenu view=new JMenu("View");
 	
-	JMenuItem showStuMarks=new JMenuItem("Marks By Each Subject");
-	JMenuItem sortRollno=new JMenuItem("Updating Roll No");
-	JMenuItem result=new JMenuItem("Result");
+	static JMenuItem showStuMarks=new JMenuItem("Marks By Each Subject");
+	static JMenuItem sortRollno=new JMenuItem("Updating Roll No");
+	static JMenuItem result=new JMenuItem("Result");
+
 	
 	JMenu file=new JMenu("File");
 	JMenu New=new JMenu("New");
@@ -44,7 +46,7 @@ JMenuBar mb=new JMenuBar();
 	JMenuItem close=new JMenuItem("Close");
 	JMenuItem exit=new JMenuItem("Exit");
 	JMenuItem academic=new JMenuItem("Academic");
-	JMenuItem student=new JMenuItem("Student");
+	static JMenuItem student=new JMenuItem("Student");
 	JMenuItem subject=new JMenuItem("subject");
 	JMenuItem major=new JMenuItem("Major");
 	
@@ -52,37 +54,41 @@ JMenuBar mb=new JMenuBar();
 	
 	JLabel pic=new JLabel(new ImageIcon("mtugate.jpg"));
 	
-	JPanel insertdata=new JPanel();
+	static JPanel insertdata=new JPanel();
 	
-	JButton show=new JButton("Show Marks");
-	JButton insertbutton=new JButton("INSERT");
-	JButton insertAcaButon=new JButton("INSERT");
+	static 	JButton show=new JButton("Show Marks");
+	static JButton insertbutton=new JButton("INSERT");
+	static 	JButton insertAcaButon=new JButton("INSERT");
 	
 	//variable declaration for sorting roll no;
-	JButton ok=new JButton("OK");
+	static JButton ok=new JButton("OK");
 	
 	//variable declaration for result;
-	JButton nextbut=new JButton("NEXT");
+	static JButton nextbut=new JButton("RESULTS");
 	
 	//variables declaration for student;
-	JLabel studentIDLabel=new JLabel("Student ID");
-	JLabel nameLabel=new JLabel("student Name");
-	JLabel rollnolabel=new JLabel("Roll No");
-	JLabel academiclabel=new JLabel("Academic ID");
-	JLabel majorlabel=new JLabel("Major");
+	 static JLabel studentIDLabel=new JLabel("Student ID");
+	static JLabel nameLabel=new JLabel("student Name");
+	static JLabel rollnolabel=new JLabel("Roll No");
+	static JLabel academiclabel=new JLabel("Academic ID");
+	static JLabel majorlabel=new JLabel("Major");
 	
-	JTextField stuIdField=new JTextField();
-	JTextField stunamefield=new JTextField();
-	JTextField rollnofield=new JTextField();
+	static JTextField stuIdField=new JTextField();
+	static JTextField stunamefield=new JTextField();
+	static JTextField rollnofield=new JTextField();
 	
-	JComboBox<AcademicModel> academicbox=new JComboBox<>();
-	JComboBox<MajorModel> majorbox=new JComboBox<>();
+	static JComboBox<AcademicModel> academicbox=new JComboBox<>();
+	static JComboBox<String> majorbox=new JComboBox<String>();
 	
-	String academicid = null;
+	static String academicid = null;
 	String majorid=null;
-	JButton add=new JButton("ADD"),delete=new JButton("DELETE"),find=new JButton("FIND");
+	static JButton add=new JButton("ADD");
+
+	static JButton delete=new JButton("DELETE");
+
+	static JButton find=new JButton("FIND");
 	
-	Container c=getContentPane();
+	 static JFrame c=new JFrame();
 	
 	public Home(){
 		
@@ -97,6 +103,7 @@ JMenuBar mb=new JMenuBar();
 		
 		home.add(insert);
 		home.add(view);
+		home.add(reMarksInsert);
 		
 		view.add(showStuMarks);
 		view.add(sortRollno);
@@ -124,29 +131,34 @@ JMenuBar mb=new JMenuBar();
 		
 		insertData();
 		next.addActionListener(this);
-		ShowStudentMarks();
+		ShowStuMarks.ShowStudentMark();
 		show.addActionListener(this);
-		UpdateRollNo();
-		showResult();
+		RollNo.UpdateRollNos();
+		Results.showResult();
 		
 		//ComboBoxs Listener
 		semesterfield.addActionListener(this);
 		majorfield.addActionListener(this);
 		coursefield.addActionListener(this);
 		
-		insertAcademic();
 		
-		insertStudent();
+		
+		
+		insertAcademic();//
+		Students.insertStudents();
+		//insertStudent();//
 		add.addActionListener(this);
 		delete.addActionListener(this);
 		find.addActionListener(this);
 		
-		insertSubject();
-		insertMajor();
+		insertSubject();//
+		insertMajor();//
 		
-		setLocation(500,50);
-		setSize(500,600);
-		setVisible(true);
+		//Department_And_Subject.addComboBox();
+		
+		c.setLocation(500,50);
+		c.setSize(500,600);
+		c.setVisible(true);
 			
 	}
 	//insert
@@ -202,7 +214,7 @@ JMenuBar mb=new JMenuBar();
 						List<MajorModel> list=MajorDA.majorcombo();
 						majorfield.removeAllItems();
 						for(MajorModel g: list){
-							majorfield.addItem(g.majorID);
+							majorfield.addItem(g.getMajorID());
 						}
 					} catch (SQLException e) {
 						
@@ -236,256 +248,6 @@ JMenuBar mb=new JMenuBar();
 		
 	}
 	
-	//view
-	public void ShowStudentMarks(){
-		
-		showStuMarks.addActionListener(new ActionListener() {
-			
-			
-			public void actionPerformed(ActionEvent arg) {
-				
-				
-				insertdata.removeAll();
-				insertdata.validate();
-				insertdata.repaint();
-				
-				c.add(insertdata,BorderLayout.CENTER);
-				insertdata.setLayout(null);
-				
-
-				acayearlabel.setBounds(50,50,90,25);
-				insertdata.add(acayearlabel);
-				academicfield.setBounds(150,50,150,25);
-				insertdata.add(academicfield);
-				
-				majornamelabel.setBounds(50,100,90,25);
-				insertdata.add(majornamelabel);
-				majorfield.setBounds(150,100,150,25);
-				insertdata.add(majorfield);
-				
-				courselabel.setBounds(50,150,90,25);
-				insertdata.add(courselabel);
-				coursefield.setBounds(150,150,150,25);
-				insertdata.add(coursefield);
-				
-				semester.setBounds(50,200,150,25);
-				insertdata.add(semester);	
-				semesterfield.setBounds(150,200,150,25);
-				insertdata.add(semesterfield);
-				
-				subcodelabel.setBounds(50,250,90,25);
-				insertdata.add(subcodelabel);
-				subcodefield.setBounds(150,250,150,25);
-				insertdata.add(subcodefield);
-				
-				show.setBounds(100,300,150,30);
-				insertdata.add(show);
-				
-				subcodefield.setMaximumRowCount(3);
-				
-				try {
-					List<AcademicModel> list=AcademicDA.combo();
-					for(AcademicModel g:list){
-						academicfield.addItem(g.academicID);
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				
-				try {
-					List<MajorModel> list=MajorDA.majorcombo();
-					for(MajorModel g: list){
-						majorfield.addItem(g.majorID);
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				
-				try {
-					
-				List<CourseModel> list= SubjectDA.coursecombo();
-					for(CourseModel g:list){
-						coursefield.addItem(g);
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-						
-				try {
-					List<SubjectModel> list = SubjectDA.semestercombo();
-					for(SubjectModel g: list){
-						semesterfield.addItem(g.semester);
-					}
-				} catch (SQLException e1) {
-				
-					e1.printStackTrace();
-				}
-				
-			}
-		});
-	}
-	
-	public void UpdateRollNo(){
-		sortRollno.addActionListener(new ActionListener(){
-
-			
-			public void actionPerformed(ActionEvent arg0) {
-				
-				insertdata.removeAll();
-				insertdata.validate();
-				insertdata.repaint();
-				
-				c.add(insertdata,BorderLayout.CENTER);
-				insertdata.setLayout(null);
-				
-				acayearlabel.setBounds(50,50,90,25);
-				insertdata.add(acayearlabel);
-				academicfield.setBounds(150,50,150,25);
-				insertdata.add(academicfield);
-				
-				majornamelabel.setBounds(50,100,90,25);
-				insertdata.add(majornamelabel);
-				majorfield.setBounds(150,100,150,25);
-				insertdata.add(majorfield);
-				
-				courselabel.setBounds(50,150,90,25);
-				insertdata.add(courselabel);
-				coursefield.setBounds(150,150,150,25);
-				insertdata.add(coursefield);
-				
-				ok.setBounds(100,300,150,30);
-				insertdata.add(ok);
-				
-				try {
-					List<AcademicModel> list=AcademicDA.combo();
-					for(AcademicModel g:list){
-						academicfield.addItem(g.academicID);
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				
-				try {
-					List<MajorModel> list=MajorDA.majorcombo();
-					for(MajorModel g: list){
-						majorfield.addItem(g.majorID);
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				
-				try {
-					
-				List<CourseModel> list= SubjectDA.coursecombo();
-					for(CourseModel g:list){
-						coursefield.addItem(g);
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				
-			}
-			
-		});
-	}
-	
-	public void showResult(){
-		result.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent arg) {
-
-				insertdata.removeAll();
-				insertdata.validate();
-				insertdata.repaint();
-				
-				c.add(insertdata,BorderLayout.CENTER);
-				insertdata.setLayout(null);
-				
-				insertdata.removeAll();
-				insertdata.validate();
-				insertdata.repaint();
-						
-					c.add(insertdata,BorderLayout.CENTER);
-					insertdata.setLayout(null);	
-
-					acayearlabel.setBounds(75,100,90,25);
-					insertdata.add(acayearlabel);
-					academicfield.setBounds(175,100,200,25);
-					insertdata.add(academicfield);
-					
-					majornamelabel.setBounds(75,150,90,25);
-					insertdata.add(majornamelabel);
-					majorfield.setBounds(175,150,200,25);
-					insertdata.add(majorfield);
-					
-					courselabel.setBounds(75,200,90,25);
-					insertdata.add(courselabel);
-					coursefield.setBounds(175,200,200,25);
-					insertdata.add(coursefield);
-					
-					semester.setBounds(75,250,150,25);
-					insertdata.add(semester);	
-					semesterfield.setBounds(175,250,200,25);
-					insertdata.add(semesterfield);
-							
-					nextbut.setBounds(295,350,80,25);
-					insertdata.add(nextbut);
-					
-					try {
-						
-						List<AcademicModel> list=AcademicDA.combo();
-						academicfield.removeAllItems();
-						for(AcademicModel g:list){
-							academicfield.addItem(g.academicID);
-						}
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-					
-					try {
-						List<MajorModel> list=MajorDA.majorcombo();
-						majorfield.removeAllItems();
-						for(MajorModel g: list){
-							majorfield.addItem(g.majorID);
-						}
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-					
-					try {
-						
-					List<CourseModel> list= SubjectDA.coursecombo();
-					coursefield.removeAllItems();
-						for(CourseModel g:list){
-							coursefield.addItem(g);
-						}
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-							
-					try {
-						List<SubjectModel> list = SubjectDA.semestercombo();
-						semesterfield.removeAllItems();
-						for(SubjectModel g: list){
-							semesterfield.addItem(g.semester);
-						}
-					} catch (SQLException e1) {
-					
-						e1.printStackTrace();
-					}
-			}
-			
-		});
-	}
 	
 	//insert academic;
 	public void insertAcademic(){
@@ -527,77 +289,6 @@ JMenuBar mb=new JMenuBar();
 			});
 	}
 	
-	//insert student;
-	public void insertStudent(){
-		
-			student.addActionListener(new ActionListener(){
-
-			
-				public void actionPerformed(ActionEvent arg0) {
-					
-					insertdata.removeAll();
-					insertdata.validate();
-					insertdata.repaint();
-				c.add(insertdata,BorderLayout.CENTER);
-				insertdata.setLayout(null);
-				
-				studentIDLabel.setBounds(75,100,90,25);
-				insertdata.add(studentIDLabel);
-				nameLabel.setBounds(75,150,100,25);
-				insertdata.add(nameLabel);
-				rollnolabel.setBounds(75,200,100,25);
-				insertdata.add(rollnolabel);
-				academiclabel.setBounds(75,250,100,25);
-				insertdata.add(academiclabel);
-				majorlabel.setBounds(75,300,100,25);
-				insertdata.add(majorlabel);
-				
-				stuIdField.setBounds(175,100,200,25);
-				insertdata.add(stuIdField);
-				stunamefield.setBounds(175,150,200,25);
-				insertdata.add(stunamefield);
-				rollnofield.setBounds(175,200,200,25);
-				insertdata.add(rollnofield);
-				academicbox.setBounds(175,250,200,25);
-				insertdata.add(academicbox);
-				majorbox.setBounds(175,300,200,25);
-				insertdata.add(majorbox);
-				
-				add.setBounds(70,400,80,20); 
-				insertdata.add(add);
-				add.setFocusable(false);
-				
-				delete.setBounds(185,400,80,20);
-				insertdata.add(delete);
-				delete.setFocusable(false);
-				
-				find.setBounds(295,400,80,20);
-				insertdata.add(find);
-				find.setFocusable(false);
-				
-				
-				try {
-					List<AcademicModel> list=AcademicDA.combo();
-					for(AcademicModel g:list){
-						academicbox.addItem(g);
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				try {
-						List<MajorModel> list=MajorDA.majorcombo();
-						for(MajorModel g: list){
-							majorbox.addItem(g);
-						}
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-			}
-			
-		});
-	}
 	
 	
 	//insert subject;
@@ -713,23 +404,70 @@ JMenuBar mb=new JMenuBar();
 		new Home();
 	}
 	
-	
-	public void actionPerformed(ActionEvent e) {
+	public static void addComboBox() {
+		try {
 		
-		//next button from insert radioButtonMenuItem in Home menu ;
-		if(e.getSource()==next){
-			StudentModel student=new StudentModel();
-			student.setAcademicID(academicfield.getSelectedItem().toString());
-			student.setSemester(semesterfield.getSelectedItem().toString());
-			student.setCourse(coursefield.getSelectedItem().toString());
-			student.setMajorID(majorfield.getSelectedItem().toString());
+			List<AcademicModel> list=AcademicDA.combo();
+			academicfield.removeAllItems();
+			for(AcademicModel g:list){
+				academicfield.addItem(g.getAcademicID());
+			}
+		} catch (SQLException e) {
 			
-			new MarksForm(student);
-			
+			e.printStackTrace();
 		}
 		
-		//action for comboBoc in view Part;
-		if(e.getSource()==coursefield || e.getSource()==majorfield || e.getSource()==semesterfield){
+		try {
+			List<MajorModel> list=MajorDA.majorcombo();
+			majorfield.removeAllItems();
+			for(MajorModel g: list){
+				majorfield.addItem(g.getMajorID());
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			
+		List<CourseModel> list= SubjectDA.coursecombo();
+		coursefield.removeAllItems();
+			for(CourseModel g:list){
+				coursefield.addItem(g.getCourse());
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+				
+		
+		try {
+			List<SubjectModel> list = SubjectDA.semestercombo();
+			semesterfield.removeAllItems();
+			for(SubjectModel g: list){
+				semesterfield.addItem(g.getSemester());
+			}
+		} catch (SQLException e1) {
+		
+			e1.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void subjectcode(StudentModel model){
+		try {
+			List<StudentModel> list=SubjectDA.subjectcombo(model);
+			for(StudentModel g:list){
+				subcodefield.addItem(g.getSubcode());
+			}
+		} catch (SQLException sql) {
+
+			sql.printStackTrace();
+		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+if(e.getSource()==coursefield || e.getSource()==majorfield || e.getSource()==semesterfield){
 			
 			Object sem=semesterfield.getSelectedItem();
 			Object majors=majorfield.getSelectedItem();
@@ -750,101 +488,21 @@ JMenuBar mb=new JMenuBar();
 						Department_And_Subject.subjectcode(semester);
 					}
 					
-				}
-				
-			}
-		
-		//show button from view radioButtonMenuItem in Home Menu;
-		if(e.getSource()==show){
-			
+				} 
 		}
 		
-		//ActionListener for student;
-		if(e.getSource()==academicbox){
-			
-			JComboBox<AcademicModel> c = (JComboBox<AcademicModel>) e.getSource();
-		      AcademicModel item = (AcademicModel) c.getSelectedItem();
-		      System.out.println(item.getAcademicID());
-		      academicid=item.getAcademicID();
-		      
-		}
-		if(e.getSource()==majorbox){
-			@SuppressWarnings("unchecked")
-			JComboBox<MajorModel> c = (JComboBox<MajorModel>) e.getSource();
-		      MajorModel item = (MajorModel) c.getSelectedItem();
-		      System.out.println(item.getMajorID());
-		      majorid=item.getMajorID();
-		}
-		
-		if(e.getSource()==add){
-			
-		System.out.println(academicid);
-		
-			if(stuIdField.getText().equals("") || stunamefield.getText().equals("") || rollnofield.getText().equals("")){
-				JOptionPane.showMessageDialog(null,"Fill Requirements");
-			}
-			else{
-				
-				StudentModel student=new StudentModel();
-				student.setAcademicID(academicid);
-				student.setMajorID(majorid);
-				student.setRollno(rollnofield.getText());
-				student.setStuid(stuIdField.getText().toUpperCase());
-				student.setStuname(stunamefield.getText().toUpperCase());
-				
-				
-				try {
-					boolean check=StudentDA.show(student);
-					
-					if(check){
-						
-						JOptionPane.showMessageDialog(null," Student ID OR ROLL NO Already EXISTS");
-					}
-					else{
-						boolean mission=StudentDA.insertStudent(student);
-						if(mission){
-							JOptionPane.showMessageDialog(null,"Insert Success");
-							}
-						else{
-							JOptionPane.showMessageDialog(null, "Insert Failed ");
-					}
-					}
-					
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
-				}
-			}
-		}
-		if(e.getSource()==delete){
-			
+		//next button from insert Menu in Home menu ;
+		if(e.getSource()==next){
 			StudentModel student=new StudentModel();
-			student.setStuid(stuIdField.getText());
-			if(stuIdField.getText().equals("")){
-				JOptionPane.showMessageDialog(this,"INSERT STUDENT_ID TO DELETE!!!!");
-			}
-			else{
-				try {
-					boolean check=StudentDA.delete(student);	
-					if(check){
-						JOptionPane.showMessageDialog(this,"Student Delete");
-					}
-					else{
-						JOptionPane.showMessageDialog(null, "CHECK ID AGAIN ");
-					}
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
-				}
-				
-			}
+			AcademicModel acadmicids=(AcademicModel)academicfield.getSelectedItem();
+			student.setAcademicID(acadmicids.academicID);
+			student.setSemester(semesterfield.getSelectedItem().toString());
+			student.setCourse(coursefield.getSelectedItem().toString());
+			student.setMajorID(majorfield.getSelectedItem().toString());
+			
+			new MarksForm(student);
+			
 		}
-		if(e.getSource()==find){
-			StudentModel student=new StudentModel();
-			student.setStuid(stuIdField.getText());
-			student.setAcademicID(academicid);
-		}
-		}
-	
-
+	}
 }
+

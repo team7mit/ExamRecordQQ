@@ -74,7 +74,7 @@ public class AcademicDA {
 			m.setAcademicID(id);
 			m.setAcademic(year);
 			list.add(m);
-			
+			System.out.println(list+"YIu");
 		}
 		System.out.println(list);
 		Connect.connectionclose(conn);
