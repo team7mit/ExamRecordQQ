@@ -1,0 +1,92 @@
+package Form;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.*;
+
+import DataAccess.AcademicDA;
+import DataAccess.MajorDA;
+import DataAccess.StudentDA;
+import DataAccess.SubjectDA;
+import Model.AcademicModel;
+import Model.CourseModel;
+import Model.MajorModel;
+import Model.StudentModel;
+import Model.SubjectModel;
+
+public class Home extends dataentry implements ActionListener{
+	
+JMenuBar mb=new JMenuBar();
+	
+	JMenu home=new JMenu("Home");
+	JRadioButtonMenuItem insert=new JRadioButtonMenuItem("Insert");
+	JRadioButtonMenuItem view=new JRadioButtonMenuItem("View");
+	
+	JMenu file=new JMenu("File");
+	JMenu New=new JMenu("New");
+	JMenuItem open=new JMenuItem("Open");
+	JMenuItem save=new JMenuItem("Save");
+	JMenuItem close=new JMenuItem("Close");
+	JMenuItem exit=new JMenuItem("Exit");
+	JMenuItem student=new JMenuItem("Student");
+	JMenuItem subject=new JMenuItem("subject");
+	JMenuItem major=new JMenuItem("Major");
+	
+	JMenu edit=new JMenu("Edit");
+	
+	JPanel insertdata=new JPanel();
+	JPanel insertstudent=new JPanel();
+	JPanel insertsubject=new JPanel();
+	JPanel insertmajor=new JPanel();
+	
+	
+	Container c=getContentPane();
+	
+	public Home(){
+		
+		setTitle("Team-7(MIT)");
+		
+		ButtonGroup bg=new ButtonGroup();
+		
+		bg.add(insert);
+		bg.add(view);
+		
+		home.add(insert);
+		home.add(view);
+		
+		New.add(student);
+		New.add(subject);
+		New.add(major);
+		
+		file.add(New);
+		file.add(open);
+		file.add(save);
+		file.add(close);
+		file.addSeparator();
+		file.add(exit);
+		
+		mb.add(home);
+		mb.add(file);
+		mb.add(edit);
+		
+		c.add(mb,BorderLayout.NORTH);
+		
+		
+		setLocation(500,50);
+		setSize(500,600);
+		setVisible(true);
+			
+	}
+	public static void main(String args[])
+	{
+		new Home();
+	}
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+
+}

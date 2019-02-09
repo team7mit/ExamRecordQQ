@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;f&apos; in &apos;Form.Department_And_Subject&apos; to &apos;panel&apos;&#x0D;&#x0A;- Original project: &apos;Examinagtion&apos;&#x0D;&#x0A;- Original element: &apos;Form.Department_And_Subject.f&apos;&#x0D;&#x0A;- Renamed element: &apos;Form.Department_And_Subject.panel&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;f&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;Form{Department_And_Subject.java[Department_And_Subject^f" name="panel" references="true" setter="false" stamp="1542783414896" textual="false" version="1.0"/>
+</session>

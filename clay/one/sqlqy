@@ -1,0 +1,71 @@
+CREATE TABLE DEFAULT_SCHEMA.Academic (
+       Academic_ID VARCHAR(50) NOT NULL
+     , Academic VARCHAR(50)
+     , PRIMARY KEY (Academic_ID)
+);
+
+CREATE TABLE DEFAULT_SCHEMA.Major (
+       Major_ID VARCHAR(50) NOT NULL
+     , Major CHAR(10)
+     , PRIMARY KEY (Major_ID)
+);
+
+CREATE TABLE DEFAULT_SCHEMA.Student (
+       Student_ID VARCHAR(10) NOT NULL
+     , Student_Name VARCHAR(50)
+     , Major_ID VARCHAR(50) NOT NULL
+     , PRIMARY KEY (Student_ID)
+     , INDEX (Major_ID)
+     , CONSTRAINT FK_Student_1 FOREIGN KEY (Major_ID)
+                  REFERENCES DEFAULT_SCHEMA.Major (Major_ID) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+CREATE TABLE DEFAULT_SCHEMA.Student_RollNo (
+       Roll_No VARCHAR(50) NOT NULL
+     , Student_ID VARCHAR(10) NOT NULL
+     , Academic_ID VARCHAR(50) NOT NULL
+     , PRIMARY KEY (Roll_No)
+     , INDEX (Student_ID)
+     , CONSTRAINT FK_Student_RollNo_1 FOREIGN KEY (Student_ID)
+                  REFERENCES DEFAULT_SCHEMA.Student (Student_ID) ON DELETE CASCADE ON UPDATE CASCADE
+     , INDEX (Academic_ID)
+     , CONSTRAINT FK_Student_RollNo_2 FOREIGN KEY (Academic_ID)
+                  REFERENCES DEFAULT_SCHEMA.Academic (Academic_ID) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+CREATE TABLE DEFAULT_SCHEMA.Subject (
+       Subject_ID VARCHAR(50) NOT NULL
+     , Subject_Name VARCHAR(50)
+     , Course VARCHAR(50)
+     , Semester VARCHAR(50)
+     , Major_ID VARCHAR(50) NOT NULL
+     , PRIMARY KEY (Subject_ID)
+     , INDEX (Major_ID)
+     , CONSTRAINT FK_Subject_1 FOREIGN KEY (Major_ID)
+                  REFERENCES DEFAULT_SCHEMA.Major (Major_ID) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+CREATE TABLE DEFAULT_SCHEMA.Marks (
+       Tutorial INT(3)
+     , Exam INT(50)
+     , Practical INT(50)
+     , Total CHAR(10)
+     , ReExam INT(50)
+     , Subject_ID VARCHAR(50) NOT NULL
+     , Academic_ID VARCHAR(50) NOT NULL
+     , Roll_No VARCHAR(50) NOT NULL
+     , Student_ID VARCHAR(10) NOT NULL
+     , INDEX (Academic_ID)
+     , CONSTRAINT FK_Marks_2 FOREIGN KEY (Academic_ID)
+                  REFERENCES DEFAULT_SCHEMA.Academic (Academic_ID) ON DELETE NO ACTION ON UPDATE CASCADE
+     , INDEX (Subject_ID)
+     , CONSTRAINT FK_Marks_1 FOREIGN KEY (Subject_ID)
+                  REFERENCES DEFAULT_SCHEMA.Subject (Subject_ID) ON DELETE CASCADE ON UPDATE CASCADE
+     , INDEX (Student_ID)
+     , CONSTRAINT FK_Marks_4 FOREIGN KEY (Student_ID)
+                  REFERENCES DEFAULT_SCHEMA.Student (Student_ID) ON DELETE CASCADE ON UPDATE CASCADE
+     , INDEX (Roll_No)
+     , CONSTRAINT FK_Marks_3 FOREIGN KEY (Roll_No)
+                  REFERENCES DEFAULT_SCHEMA.Student_RollNo (Roll_No) ON DELETE CASCADE ON UPDATE CASCADE
+);
+

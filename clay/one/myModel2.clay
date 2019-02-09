@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clay-model clay-version="1.4.0">
+<database-model alias="" author="" begin-script="" end-script="" name="myModel2" remarks="" sql-dialect-id="jp.azzurri.clay.dialect.MySQL_5_0_Dialect" uid="302692b1:16574c7c8d9:-8000" version="1.0">
+<database-model-description/>
+<schema-list>
+<schema alias="Examination Project" name="Examination_Project" remarks="" uid="12e13abd:166e2e97205:-7ffe">
+<schema-description/>
+<domain-list/>
+<table-list>
+<table alias="" name="Student" remarks="" uid="12e13abd:166e2e97205:-8000">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="612" y="34"/>
+<column-list>
+<column alias="Student Id" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="true" name="Student_ID" remarks="" uid="5afba80c:166e3064483:-7ffd">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="false" name="Student_Name" remarks="" uid="5afba80c:166e3064483:-7ffa">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Major Id" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Major_ID" remarks="" uid="5afba80c:166e3064483:-7c4f">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_STUDENT" remarks="" uid="12e13abd:166e2e97205:-7fff">
+<primary-key-description/>
+<primary-key-column name="Student_ID"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="Fk Student 1" name="FK_Student_1" on-delete="NO ACTION" on-update="CASCADE" referenced-key="PK_MAJOR" referenced-table="Major" referenced-table-schema="Examination_Project" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="5afba80c:166e3064483:-7c50">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="Major_ID" referenced-key-column-name="Major_ID"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="Academic" remarks="" uid="5afba80c:166e3064483:-7ff8">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="933" y="446"/>
+<column-list>
+<column alias="Academic Id" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Academic_ID" remarks="" uid="5afba80c:166e3064483:-7ff2">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Academic" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="false" name="Academic" remarks="" uid="5afba80c:166e3064483:-7ff1">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_ACADEMIC" remarks="" uid="5afba80c:166e3064483:-7ff7">
+<primary-key-description/>
+<primary-key-column name="Academic_ID"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table alias="Major" name="Major" remarks="" uid="5afba80c:166e3064483:-7ff0">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="251" y="30"/>
+<column-list>
+<column alias="Major Id" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Major_ID" remarks="" uid="5afba80c:166e3064483:-7fea">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="false" name="Major" remarks="" uid="5afba80c:166e3064483:-7fe9">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_MAJOR" remarks="" uid="5afba80c:166e3064483:-7fef">
+<primary-key-description/>
+<primary-key-column name="Major_ID"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table alias="" name="Student_RollNo" remarks="" uid="5afba80c:166e3064483:-7fe8">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="941" y="25"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Roll_No" remarks="" uid="5afba80c:166e3064483:-7fe4">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Student Id" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="true" name="Student_ID" remarks="" uid="5afba80c:166e3064483:-7bf5">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Academic Id" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Academic_ID" remarks="" uid="5afba80c:166e3064483:-7be0">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_STUDENT_ROLLNO" remarks="" uid="5afba80c:166e3064483:-7fe7">
+<primary-key-description/>
+<primary-key-column name="Academic_ID"/>
+<primary-key-column name="Roll_No"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="Fk Student Roll No 1" name="FK_Student_RollNo_1" on-delete="CASCADE" on-update="CASCADE" referenced-key="PK_STUDENT" referenced-table="Student" referenced-table-schema="Examination_Project" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="5afba80c:166e3064483:-7bf6">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="Student_ID" referenced-key-column-name="Student_ID"/>
+</foreign-key>
+<foreign-key alias="Fk Student Roll No 2" name="FK_Student_RollNo_2" on-delete="NO ACTION" on-update="CASCADE" referenced-key="PK_ACADEMIC" referenced-table="Academic" referenced-table-schema="Examination_Project" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="5afba80c:166e3064483:-7be1">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="Academic_ID" referenced-key-column-name="Academic_ID"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="Subject" remarks="" uid="5afba80c:166e3064483:-7fe1">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="257" y="184"/>
+<column-list>
+<column alias="Subject Code" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Subject_Code" remarks="" uid="5afba80c:166e3064483:-7fda">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="false" name="Subject_Name" remarks="" uid="5afba80c:166e3064483:-7fd9">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="false" name="Course" remarks="" uid="5afba80c:166e3064483:-7fd8">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Semester" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="false" name="Semester" remarks="" uid="5afba80c:166e3064483:-7fd7">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Major Id" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Major_ID" remarks="" uid="5afba80c:166e3064483:-7bb9">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_SUBJECT" remarks="" uid="5afba80c:166e3064483:-7fe0">
+<primary-key-description/>
+<primary-key-column name="Subject_Code"/>
+<primary-key-column name="Major_ID"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="Fk Subject 1" name="FK_Subject_1" on-delete="NO ACTION" on-update="CASCADE" referenced-key="PK_MAJOR" referenced-table="Major" referenced-table-schema="Examination_Project" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="5afba80c:166e3064483:-7bba">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="Major_ID" referenced-key-column-name="Major_ID"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="Marks" remarks="" uid="5afba80c:166e3064483:-7fd6">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="261" y="372"/>
+<column-list>
+<column alias="Tutorial" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="Tutorial" remarks="" uid="5afba80c:166e3064483:-7fd2">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n)"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED ZEROFILL"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) ZEROFILL"/>
+<variant type-name-pattern="INT UNSIGNED"/>
+<variant type-name-pattern="INT UNSIGNED ZEROFILL"/>
+<variant type-name-pattern="INT ZEROFILL"/>
+</data-type>
+</column>
+<column alias="Exam" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="Exam" remarks="" uid="5afba80c:166e3064483:-7fd1">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n)"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED ZEROFILL"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) ZEROFILL"/>
+<variant type-name-pattern="INT UNSIGNED"/>
+<variant type-name-pattern="INT UNSIGNED ZEROFILL"/>
+<variant type-name-pattern="INT ZEROFILL"/>
+</data-type>
+</column>
+<column alias="Practical" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="Practical" remarks="" uid="5afba80c:166e3064483:-7fd0">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n)"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED ZEROFILL"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) ZEROFILL"/>
+<variant type-name-pattern="INT UNSIGNED"/>
+<variant type-name-pattern="INT UNSIGNED ZEROFILL"/>
+<variant type-name-pattern="INT ZEROFILL"/>
+</data-type>
+</column>
+<column alias="Total" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="Total" remarks="" uid="5afba80c:166e3064483:-7fcf">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n)"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED ZEROFILL"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) ZEROFILL"/>
+<variant type-name-pattern="INT UNSIGNED"/>
+<variant type-name-pattern="INT UNSIGNED ZEROFILL"/>
+<variant type-name-pattern="INT ZEROFILL"/>
+</data-type>
+</column>
+<column alias="Re Exam" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="ReExam" remarks="" uid="5afba80c:166e3064483:-7fce">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n)"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) UNSIGNED ZEROFILL"/>
+<variant precision-max="10" precision-min="0" precision-variable="%n" type-name-pattern="INT(%n) ZEROFILL"/>
+<variant type-name-pattern="INT UNSIGNED"/>
+<variant type-name-pattern="INT UNSIGNED ZEROFILL"/>
+<variant type-name-pattern="INT ZEROFILL"/>
+</data-type>
+</column>
+<column alias="Subject Code" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Subject_Code" remarks="" uid="5afba80c:166e3064483:-7b5d">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Academic Id" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Academic_ID" remarks="" uid="5afba80c:166e3064483:-7b1c">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Roll No" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Roll_No" remarks="" uid="5afba80c:166e3064483:-7ac6">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="Major Id" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="true" name="Major_ID" remarks="" uid="5b132063:166e9cae661:-7f35">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_MARKS" remarks="" uid="5afba80c:166e3064483:-7fd5">
+<primary-key-description/>
+<primary-key-column name="Subject_Code"/>
+<primary-key-column name="Academic_ID"/>
+<primary-key-column name="Roll_No"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="Fk Marks 2" name="FK_Marks_2" on-delete="NO ACTION" on-update="CASCADE" referenced-key="PK_ACADEMIC" referenced-table="Academic" referenced-table-schema="Examination_Project" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="5afba80c:166e3064483:-7b1d">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="Academic_ID" referenced-key-column-name="Academic_ID"/>
+</foreign-key>
+<foreign-key alias="Fk Marks 3" name="FK_Marks_3" on-delete="NO ACTION" on-update="CASCADE" referenced-key="PK_STUDENT_ROLLNO" referenced-table="Student_RollNo" referenced-table-schema="Examination_Project" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="5afba80c:166e3064483:-7ac7">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="Academic_ID" referenced-key-column-name="Academic_ID"/>
+<foreign-key-column column-name="Roll_No" referenced-key-column-name="Roll_No"/>
+</foreign-key>
+<foreign-key alias="" name="FK_Marks_4" on-delete="NO ACTION" on-update="CASCADE" referenced-key="PK_SUBJECT" referenced-table="Subject" referenced-table-schema="Examination_Project" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="5b132063:166e9cae661:-7de1">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="Subject_Code" referenced-key-column-name="Subject_Code"/>
+<foreign-key-column column-name="Major_ID" referenced-key-column-name="Major_ID"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="user" remarks="" uid="31c17fd4:166f1a990ae:-7ffa">
+<table-description/>
+<table-figure-bounds height="116" width="175" x="55" y="150"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="true" name="userID" remarks="" uid="31c17fd4:166f1a990ae:-7ff4">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="50" decimal-digits="0" default-value="" mandatory="false" name="username" remarks="" uid="31c17fd4:166f1a990ae:-7ff1">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="30" decimal-digits="0" default-value="" mandatory="false" name="password" remarks="" uid="31c17fd4:166f1a990ae:-7ff0">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="NATIONAL VARCHAR" selected-variant-pattern="NATIONAL VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="NATIONAL VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="NATIONAL VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="false" name="userlevel" remarks="" uid="31c17fd4:166f1a990ae:-7fef">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+<variant precision-max="255" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n) BINARY"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_USER" remarks="" uid="31c17fd4:166f1a990ae:-7ff9">
+<primary-key-description/>
+<primary-key-column name="userID"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+</table-list>
+</schema>
+</schema-list>
+</database-model>
+</clay-model>

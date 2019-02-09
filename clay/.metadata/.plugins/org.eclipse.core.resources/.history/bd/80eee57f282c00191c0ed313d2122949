@@ -1,0 +1,198 @@
+package Form;
+
+import java.awt.BorderLayout;
+import java.awt.event.*;
+import java.sql.SQLException;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import DataAccess.AcademicDA;
+import DataAccess.MajorDA;
+import Model.AcademicModel;
+import Model.MajorModel;
+
+public class Academic extends Home implements ActionListener{
+	
+	JLabel acaID=new JLabel("Academic ID");
+	JLabel aca=new JLabel("Academic");
+	
+	JTextField t1=new JTextField();
+	JTextField t2=new JTextField();
+	
+		public static JTable table;
+		public static DefaultTableModel model;
+		Object[] row;
+		
+		public void insertAcademic(){
+			academic.addActionListener(new ActionListener(){
+
+				
+				public void actionPerformed(ActionEvent arg0) {
+					
+					insertdata.removeAll();
+					insertdata.validate();
+					insertdata.repaint();
+					
+
+					c.add(insertdata,BorderLayout.CENTER);
+					insertdata.setLayout(null);
+			
+					acaID.setBounds(20,50,150,20);
+					insertdata.add(acaID);
+					aca.setBounds(20,90,150,20);
+					insertdata.add(aca);
+			
+					t1.setBounds(150,50,150,20);
+					insertdata.add(t1);
+					t2.setBounds(150,90,150,20);
+					insertdata.add(t2);
+			
+					insertbutton.setBounds(220,150,80,20);
+					insertdata.add(insertbutton);
+					
+					Object[] columns={"Academic_ID","Academic"};
+					model=new DefaultTableModel();
+					model.setColumnIdentifiers(columns);
+					table=new JTable();
+					table.setModel(model);
+					table.setRowHeight(20);
+				
+					jsp=new JScrollPane(table);
+					jsp.setBounds(150,170,300,100);
+					insertdata.add(jsp);
+					
+					
+					try {
+						AcademicDA.showAcademic(model);
+					} catch (SQLException e2) {
+
+						e2.printStackTrace();
+					}
+					
+					table.addMouseListener(new MouseAdapter(){
+						
+						public void mouseClicked(MouseEvent e)
+						{
+							int i=table.getSelectedRow();
+							t1.setText(model.getValueAt(i, 0).toString());
+							t2.setText(model.getValueAt(i, 1).toString());
+							
+						}
+					});
+					
+			}
+				
+				});
+		}
+		
+		public Academic() throws Exception
+		{
+			
+			
+			try {
+				AcademicDA.showAcademic(model);
+			} catch (SQLException e2) {
+
+				e2.printStackTrace();
+			}
+			
+			table.addMouseListener(new MouseAdapter(){
+				
+				public void mouseClicked(MouseEvent e)
+				{
+					int i=table.getSelectedRow();
+					t1.setText(model.getValueAt(i, 0).toString());
+					t2.setText(model.getValueAt(i, 1).toString());
+					
+				}
+			});
+			
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			
+			if(e.getSource()==insertbutton){
+				String id=t1.getText();
+				String name=t2.getText();
+				
+				AcademicModel academic=new AcademicModel();
+				academic.setAcademicID(id);
+				academic.setAcademic(name);
+				
+				row=new Object[2];
+				row[0]=t1.getText();
+				row[1]=t2.getText();
+				
+				model.addRow(row);
+				
+					if(id.equals("") || id.equals(null) || name.equals("") || name.equals(null)){
+						
+						JOptionPane.showMessageDialog(this,"Fill Requirements...","WARNING",JOptionPane.WARNING_MESSAGE);
+					}
+					else {
+						
+						try {
+							
+							boolean op=AcademicDA.AddAcademic(academic);
+							
+							if(op){
+								
+								t1.setText(null);
+								t2.setText(null);
+						
+								JOptionPane.showMessageDialog(this,"Successfully Created");
+								
+							}
+							else{
+								JOptionPane.showMessageDialog(this," Insert Failed");
+							}
+							
+							
+							
+						} catch (SQLException e1) {
+
+							e1.printStackTrace();
+						}
+					}
+			}
+			/*if(e.getSource()==b1){
+				
+				int i=table.getSelectedRow();
+				if(i>=0)
+				{
+					model.removeRow(i);
+				}
+				
+				String id=tf1.getText();
+				String name=tf2.getText();
+				
+				AcademicModel academic=new AcademicModel();
+				academic.setAcademicID(id);
+				academic.setAcademic(name);
+				
+				boolean op;
+				try {
+				//	op = AcademicDA.deleteAcademic(academic);
+					if(op){
+						tf1.setText(null);
+						tf2.setText(null);
+						
+						JOptionPane.showMessageDialog(null,"Delete Success!!!");
+						
+					}
+					else{
+						
+						JOptionPane.showMessageDialog(null,"Delete Fail!!");
+					}
+				} catch (SQLException e1) {
+
+					e1.printStackTrace();
+				}
+				
+				
+				
+			}*/
+		}
+}
+

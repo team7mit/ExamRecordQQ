@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.debug.ui.SCOPED_SAVE_SELECTION_DIALOG">
+		<item value="305" key="DIALOG_WIDTH"/>
+		<item value="1|Zawgyi-One|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|0|0|0|0|0|Zawgyi-One" key="DIALOG_FONT_NAME"/>
+		<item value="401" key="DIALOG_HEIGHT"/>
+	</section>
+	<section name="org.eclipse.debug.ui.SELECT_LAUNCH_SHORTCUT_DIALOG">
+		<item value="231" key="DIALOG_WIDTH"/>
+		<item value="1|Zawgyi-One|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|0|0|0|0|0|Zawgyi-One" key="DIALOG_FONT_NAME"/>
+		<item value="457" key="DIALOG_HEIGHT"/>
+	</section>
+</section>

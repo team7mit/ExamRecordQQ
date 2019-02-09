@@ -1,0 +1,196 @@
+package Form;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.swing.*;
+
+import DataAccess.AcademicDA;
+import DataAccess.Department_And_SubjectDA;
+import DataAccess.MajorDA;
+import DataAccess.SubjectDA;
+import Model.AcademicModel;
+import Model.MajorModel;
+import Model.SubjectModel;
+
+public class Department_And_Subject extends dataentry implements ActionListener{
+	
+	private JPanel panel=new JPanel();
+	//JButton news1=new JButton("NEW");
+	//JButton news2=new JButton("NEW");
+	//JButton news3=new JButton("NEW");
+	private JFrame f=new JFrame();
+	@SuppressWarnings("unchecked")
+	public Department_And_Subject(){
+		
+		setTitle("TEAM-7(MIT)");
+		setResizable(false);
+		setLayout(null);
+				
+		f.add(panel);
+		panel.setLayout(null);
+		panel.setBounds(50, 50, 400, 400);
+
+		acayearlabel.setBounds(50,50,90,25);
+		panel.add(acayearlabel);
+		academicfield.setBounds(150,50,200,25);
+		panel.add(academicfield);
+		//news1.setBounds(275,50,75,25);
+		//p1.add(news1);
+		
+		
+		majornamelabel.setBounds(50,100,90,25);
+		panel.add(majornamelabel);
+		majorfield.setBounds(150,100,200,25);
+		panel.add(majorfield);
+		//news2.setBounds(275, 100, 75, 25);
+		//p1.add(news2);
+		
+		courselabel.setBounds(50,150,90,25);
+		panel.add(courselabel);
+		coursefield.setBounds(150,150,200,25);
+		panel.add(coursefield);
+		
+		semester.setBounds(50,200,150,25);
+		panel.add(semester);	
+		semesterfield.setBounds(150,200,150,25);
+		panel.add(semesterfield);
+		
+		subcodelabel.setBounds(50,250,90,25);
+		panel.add(subcodelabel);
+		subcodefield.setBounds(150,250,200,25);
+		panel.add(subcodefield);
+		//news3.setBounds(275, 280, 75, 25);
+		//p1.add(news3);
+		
+		subcodefield.setMaximumRowCount(3);
+		
+		cancel.setBounds(110,350,80,25);
+		panel.add(cancel);
+		next.setBounds(210,350,80,25);
+		panel.add(next);
+		
+		next.addActionListener(this);
+		cancel.addActionListener(this);
+		
+		
+		//news1.addActionListener(this);
+		//news2.addActionListener(this);
+		//news3.addActionListener(this);
+		
+		try {
+			List<AcademicModel> list=AcademicDA.combo();
+			for(AcademicModel g:list){
+				academicfield.addItem(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			List<MajorModel> list=MajorDA.majorcombo();
+			for(MajorModel g: list){
+				majorfield.addItem(g.majorID);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			
+		List<SubjectModel> list= SubjectDA.coursecombo();
+			for(SubjectModel g:list){
+				coursefield.addItem(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+				
+		try {
+			List<SubjectModel> list = SubjectDA.semestercombo();
+			for(SubjectModel g: list){
+				semesterfield.addItem(g.semester);
+			}
+		} catch (SQLException e1) {
+		
+			e1.printStackTrace();
+		}
+		
+		f.setLocation(500,50);
+		f.setSize(500,600);
+		f.setVisible(true);
+
+		
+	}
+	
+	
+	public void subjectcode(SubjectModel model){
+		try {
+			List<SubjectModel> list=SubjectDA.subjectcombo(model);
+			for(SubjectModel g:list){
+				subcodefield.addItem(g.subCode);
+			}
+		} catch (SQLException sql) {
+
+			sql.printStackTrace();
+		}
+	}
+	
+	public void addMajor() throws SQLException{
+		Department_And_SubjectDA das=new Department_And_SubjectDA();
+		ArrayList<String>list=das.getMajor();
+		for(int i=0;i<list.size();i++)
+		{
+			majorfield.addItem(i);
+		}
+	}
+	
+	
+	public static void main(String[] args) {
+		//academiccreation();
+		new Department_And_Subject();
+		
+	}
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource()==next){
+			//f.dispose();
+			
+			if(radiofirst.isSelected()){
+				
+				
+				//new ResultOfAllMarks(radiofirst.getText(),(String)coursefield.getSelectedItem(),(String) deptfield.getSelectedItem(),(String) subcodefield.getSelectedItem(),(String)academicfield.getSelectedItem());
+				
+				
+				
+			}
+			if(radiosecond.isSelected()){
+				//new ResultOfAllMarks(radiosecond.getText(),(String)coursefield.getSelectedItem(),(String) deptfield.getSelectedItem(),(String) subcodefield.getSelectedItem(),(String)academicfield.getSelectedItem());
+			}
+			
+			
+		}
+	if(e.getSource()==cancel){
+		f.dispose();
+	}
+		
+	if(e.getSource()==next){
+		if(subcodefield.getSelectedItem()==null){
+			JOptionPane.showMessageDialog(panel, "Insert Subject");
+		}
+		else{
+			new MarksForm();
+		}
+	}
+	}
+	
+
+
+}

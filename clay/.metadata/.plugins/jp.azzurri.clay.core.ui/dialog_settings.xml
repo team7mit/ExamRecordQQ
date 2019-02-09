@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="NewDatabaseModelWizard">
+		<item value="Testing" key="filename"/>
+		<item value="MySQL 5.0" key="sql.dialect"/>
+		<item value="/one" key="container.full.path"/>
+	</section>
+	<section name="EditTableDialog2">
+		<item value="1" key="selectedTab"/>
+	</section>
+	<section name="GenerateDDLScriptWizard">
+		<item value="false" key="generateDropIndex"/>
+		<item value="false" key="generateDropDomain"/>
+		<item value="false" key="generateDrop"/>
+		<item value="false" key="generateColumnComments"/>
+		<item value="false" key="generateOutOfLinePrimaryKey"/>
+		<item value="true" key="generateTable"/>
+		<item value="false" key="generateDomainComments"/>
+		<item value="false" key="generateTableComments"/>
+		<item value="true" key="useDomains"/>
+		<item value="false" key="alwaysQuote"/>
+		<item value="/one" key="container.full.path"/>
+		<item value="false" key="generateCreateDomain"/>
+		<item value="queries.sql" key="filename"/>
+		<item value="false" key="generateOutOfLineForeignKey"/>
+		<item value="false" key="generateOutOfLineUniqueKey"/>
+		<item value="true" key="generateIndexes"/>
+		<item value="false" key="generateIndexComments"/>
+		<item value="false" key="noSchemas"/>
+		<item value="true" key="generateKeyDuplicateIndexes"/>
+	</section>
+</section>

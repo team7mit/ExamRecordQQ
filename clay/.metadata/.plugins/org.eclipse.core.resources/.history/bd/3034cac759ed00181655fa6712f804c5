@@ -1,0 +1,242 @@
+package Form;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.swing.*;
+
+import DataAccess.AcademicDA;
+import DataAccess.Department_And_SubjectDA;
+import DataAccess.MajorDA;
+import DataAccess.SubjectDA;
+import Model.AcademicModel;
+import Model.MajorModel;
+import Model.SubjectModel;
+
+public class Department_And_Subject extends dataentry implements ActionListener{
+	
+	private JFrame f=new JFrame();
+	//JButton news1=new JButton("NEW");
+	//JButton news2=new JButton("NEW");
+	//JButton news3=new JButton("NEW");
+	JButton b=new JButton("OK");
+	
+	@SuppressWarnings("unchecked")
+	public Department_And_Subject(){
+		
+		f.setTitle("TEAM-7(MIT)");
+		f.setResizable(false);
+		f.setLayout(null);
+				
+		p1.setLayout(null);
+		p2.setLayout(null);
+		
+		
+		
+		p1.setBounds(50,50,390,300);
+		p2.setBounds(50,350,390,200);
+	
+		f.add(p1);
+		f.add(p2);
+
+		acayearlabel.setBounds(50,50,90,25);
+		p1.add(acayearlabel);
+		academicfield.setBounds(150,50,200,25);
+		p1.add(academicfield);
+		//news1.setBounds(275,50,75,25);
+		//p1.add(news1);
+		
+		
+		majornamelabel.setBounds(50,100,90,25);
+		p1.add(majornamelabel);
+		majorfield.setBounds(150,100,200,25);
+		p1.add(majorfield);
+		//news2.setBounds(275, 100, 75, 25);
+		//p1.add(news2);
+		
+		courselabel.setBounds(50,150,90,25);
+		p1.add(courselabel);
+		coursefield.setBounds(150,150,200,25);
+		p1.add(coursefield);
+		
+		semester.setBounds(50,200,150,25);
+		p1.add(semester);	
+		semesterfield.setBounds(150,200,150,25);
+		p1.add(semesterfield);
+		
+		b.setBounds(150,250,80,25);
+		p1.add(b);
+		
+		p1.setBorder(BorderFactory.createTitledBorder("Subject Data Info"));
+		p2.setBorder(BorderFactory.createTitledBorder("Subjects"));
+		
+	
+		subcodelabel.setBounds(50,50,90,25);
+		p2.add(subcodelabel);
+		subcodefield.setBounds(150,50,200,25);
+		p2.add(subcodefield);
+		//news3.setBounds(275, 280, 75, 25);
+		//p1.add(news3);
+		
+		subcodefield.setMaximumRowCount(3);
+		
+		cancel.setBounds(110,100,80,25);
+		p2.add(cancel);
+		next.setBounds(210,100,80,25);
+		p2.add(next);
+		
+		next.addActionListener(this);
+		cancel.addActionListener(this);
+		b.addActionListener(new ActionListener(){
+
+			
+			public void actionPerformed(ActionEvent e) {
+				SubjectModel model=new SubjectModel();
+				model.setMajorID(majorfield.getSelectedItem().toString());
+				model.setCourse(coursefield.getSelectedItem().toString());
+				model.setSemester(semesterfield.getSelectedItem().toString());
+				if(subcodefield.getSelectedItem()==null)
+				{
+					subjectcode(model);
+					
+				}
+				else{
+				subcodefield.removeAllItems();
+				subjectcode(model);
+				}
+			}
+			
+		});
+		
+		
+		//news1.addActionListener(this);
+		//news2.addActionListener(this);
+		//news3.addActionListener(this);
+		
+		try {
+			List<AcademicModel> list=AcademicDA.combo();
+			for(AcademicModel g:list){
+				academicfield.addItem(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			List<MajorModel> list=MajorDA.majorcombo();
+			for(MajorModel g: list){
+				majorfield.addItem(g.majorID);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			
+		List<SubjectModel> list= SubjectDA.coursecombo();
+			for(SubjectModel g:list){
+				coursefield.addItem(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+				
+		try {
+			List<SubjectModel> list = SubjectDA.semestercombo();
+			for(SubjectModel g: list){
+				semesterfield.addItem(g.semester);
+			}
+		} catch (SQLException e1) {
+		
+			e1.printStackTrace();
+		}
+		
+		f.setLocation(500,50);
+		f.setSize(500,600);
+		f.setVisible(true);
+
+		
+	}
+	
+	
+	public void subjectcode(SubjectModel model){
+		try {
+			List<SubjectModel> list=SubjectDA.subjectcombo(model);
+			for(SubjectModel g:list){
+				subcodefield.addItem(g.subCode);
+			}
+		} catch (SQLException sql) {
+
+			sql.printStackTrace();
+		}
+	}
+	
+	public void addMajor() throws SQLException{
+		Department_And_SubjectDA das=new Department_And_SubjectDA();
+		ArrayList<String>list=das.getMajor();
+		for(int i=0;i<list.size();i++)
+		{
+			majorfield.addItem(i);
+		}
+	}
+	
+	
+	public static void main(String[] args) {
+		//academiccreation();
+		new Department_And_Subject();
+		
+	}
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource()==b){
+			
+			if(radiofirst.isSelected()){
+				
+				
+			}
+			if(radiosecond.isSelected()){
+				
+			}
+
+		}
+		if(e.getSource()==next){
+			//f.dispose();
+			
+			if(radiofirst.isSelected()){
+				
+				
+				//new ResultOfAllMarks(radiofirst.getText(),(String)coursefield.getSelectedItem(),(String) deptfield.getSelectedItem(),(String) subcodefield.getSelectedItem(),(String)academicfield.getSelectedItem());
+				
+				
+				
+			}
+			if(radiosecond.isSelected()){
+				//new ResultOfAllMarks(radiosecond.getText(),(String)coursefield.getSelectedItem(),(String) deptfield.getSelectedItem(),(String) subcodefield.getSelectedItem(),(String)academicfield.getSelectedItem());
+			}
+			
+			
+		}
+	if(e.getSource()==cancel){
+		f.dispose();
+	}
+		
+	if(e.getSource()==next){
+		if(subcodefield.getSelectedItem()==null){
+			JOptionPane.showMessageDialog(f, "Insert Subject");
+		}
+		else{
+			new MarksForm();
+		}
+	}
+	}
+	
+
+
+}

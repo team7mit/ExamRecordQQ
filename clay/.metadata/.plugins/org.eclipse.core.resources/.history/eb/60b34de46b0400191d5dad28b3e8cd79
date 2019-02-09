@@ -1,0 +1,444 @@
+package Form;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.*;
+
+import DataAccess.AcademicDA;
+import DataAccess.MajorDA;
+import DataAccess.StudentDA;
+import DataAccess.SubjectDA;
+import Model.AcademicModel;
+import Model.CourseModel;
+import Model.MajorModel;
+import Model.StudentModel;
+import Model.SubjectModel;
+
+public class Home extends dataentry implements ActionListener{
+	
+JMenuBar mb=new JMenuBar();
+	
+	JMenu home=new JMenu("Home");
+	JRadioButtonMenuItem insert=new JRadioButtonMenuItem("Insert");
+	JRadioButtonMenuItem view=new JRadioButtonMenuItem("View");
+	
+	JMenu file=new JMenu("File");
+	JMenu New=new JMenu("New");
+	JMenuItem open=new JMenuItem("Open");
+	JMenuItem save=new JMenuItem("Save");
+	JMenuItem close=new JMenuItem("Close");
+	JMenuItem exit=new JMenuItem("Exit");
+	JMenuItem student=new JMenuItem("Student");
+	JMenuItem subject=new JMenuItem("subject");
+	JMenuItem major=new JMenuItem("Major");
+	
+	JMenu edit=new JMenu("Edit");
+	
+	JPanel insertdata=new JPanel();
+	/*JPanel insertstudent=new JPanel();
+	JPanel insertsubject=new JPanel();
+	JPanel insertmajor=new JPanel();*/
+	
+	JButton show=new JButton("Show Marks");
+	
+	Container c=getContentPane();
+	
+	public Home(){
+		
+		setTitle("Team-7(MIT)");
+		
+		ButtonGroup bg=new ButtonGroup();
+		
+		bg.add(insert);
+		bg.add(view);
+		
+		home.add(insert);
+		home.add(view);
+		
+		New.add(student);
+		New.add(subject);
+		New.add(major);
+		
+		file.add(New);
+		file.add(open);
+		file.add(save);
+		file.add(close);
+		file.addSeparator();
+		file.add(exit);
+		
+		mb.add(home);
+		mb.add(file);
+		mb.add(edit);
+		
+		c.add(mb,BorderLayout.NORTH);
+		c.add(insertdata, BorderLayout.CENTER);
+		
+		insertData();
+		next.addActionListener(this);
+		
+		insertStudent();
+		insertSubject();
+		
+		setLocation(500,50);
+		setSize(500,600);
+		setVisible(true);
+			
+	}
+	
+	public void insertData(){
+			insert.addItemListener(new ItemListener(){
+			
+			public void itemStateChanged(ItemEvent i) {
+				
+				insertdata.removeAll();
+				insertdata.validate();
+				insertdata.repaint();
+						
+					c.add(insertdata,BorderLayout.CENTER);
+					insertdata.setLayout(null);	
+
+					acayearlabel.setBounds(75,100,90,25);
+					insertdata.add(acayearlabel);
+					academicfield.setBounds(175,100,200,25);
+					insertdata.add(academicfield);
+					
+					majornamelabel.setBounds(75,150,90,25);
+					insertdata.add(majornamelabel);
+					majorfield.setBounds(175,150,200,25);
+					insertdata.add(majorfield);
+					
+					courselabel.setBounds(75,200,90,25);
+					insertdata.add(courselabel);
+					coursefield.setBounds(175,200,200,25);
+					insertdata.add(coursefield);
+					
+					semester.setBounds(75,250,150,25);
+					insertdata.add(semester);	
+					semesterfield.setBounds(175,250,200,25);
+					insertdata.add(semesterfield);
+							
+					next.setBounds(295,350,80,25);
+					insertdata.add(next);
+					
+					
+					try {
+					
+						List<AcademicModel> list=AcademicDA.combo();
+						academicfield.removeAllItems();
+						for(AcademicModel g:list){
+							academicfield.addItem(g.academicID);
+						}
+					} catch (SQLException e) {
+						
+						e.printStackTrace();
+					}
+					
+					try {
+						List<MajorModel> list=MajorDA.majorcombo();
+						majorfield.removeAllItems();
+						for(MajorModel g: list){
+							majorfield.addItem(g.majorID);
+						}
+					} catch (SQLException e) {
+						
+						e.printStackTrace();
+					}
+					
+					try {
+						
+					List<CourseModel> list= SubjectDA.coursecombo();
+					coursefield.removeAllItems();
+						for(CourseModel g:list){
+							coursefield.addItem(g);
+						}
+					} catch (SQLException e) {
+						
+						e.printStackTrace();
+					}
+							
+					try {
+						List<SubjectModel> list = SubjectDA.semestercombo();
+						semesterfield.removeAllItems();
+						for(SubjectModel g: list){
+							semesterfield.addItem(g.semester);
+						}
+					} catch (SQLException e1) {
+					
+						e1.printStackTrace();
+					}
+			}
+			
+		});
+		
+	}
+	
+	public void viewData(){
+		
+		view.addItemListener(new ItemListener() {
+			
+			
+			public void itemStateChanged(ItemEvent arg) {
+				
+				
+				insertdata.removeAll();
+				insertdata.validate();
+				insertdata.repaint();
+				
+				c.add(insertdata,BorderLayout.CENTER);
+				insertdata.setLayout(null);
+				
+
+				acayearlabel.setBounds(50,50,90,25);
+				insertdata.add(acayearlabel);
+				academicfield.setBounds(150,50,150,25);
+				insertdata.add(academicfield);
+				
+				majornamelabel.setBounds(50,100,90,25);
+				insertdata.add(majornamelabel);
+				majorfield.setBounds(150,100,150,25);
+				insertdata.add(majorfield);
+				
+				courselabel.setBounds(50,150,90,25);
+				insertdata.add(courselabel);
+				coursefield.setBounds(150,150,150,25);
+				insertdata.add(coursefield);
+				
+				semester.setBounds(50,200,150,25);
+				insertdata.add(semester);	
+				semesterfield.setBounds(150,200,150,25);
+				insertdata.add(semesterfield);
+				
+				subcodelabel.setBounds(50,250,90,25);
+				insertdata.add(subcodelabel);
+				subcodefield.setBounds(150,250,150,25);
+				insertdata.add(subcodefield);
+				
+				show.setBounds(100,300,150,30);
+				insertdata.add(show);
+				
+				subcodefield.setMaximumRowCount(3);
+				
+				try {
+					List<AcademicModel> list=AcademicDA.combo();
+					for(AcademicModel g:list){
+						academicfield.addItem(g.academicID);
+					}
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+				
+				try {
+					List<MajorModel> list=MajorDA.majorcombo();
+					for(MajorModel g: list){
+						majorfield.addItem(g.majorID);
+					}
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+				
+				try {
+					
+				List<CourseModel> list= SubjectDA.coursecombo();
+					for(CourseModel g:list){
+						coursefield.addItem(g);
+					}
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+						
+				try {
+					List<SubjectModel> list = SubjectDA.semestercombo();
+					for(SubjectModel g: list){
+						semesterfield.addItem(g.semester);
+					}
+				} catch (SQLException e1) {
+				
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+	}
+	
+	public void insertStudent(){
+		
+		JLabel studentIDLabel=new JLabel("Student ID");
+		JLabel nameLabel=new JLabel("student Name");
+		JLabel rollnolabel=new JLabel("Roll No");
+		JLabel academiclabel=new JLabel("Academic ID");
+		JLabel majorlabel=new JLabel("Major");
+		
+		JButton add=new JButton("ADD"),delete=new JButton("DELETE"),find=new JButton("FIND");
+		
+		JTextField stuIdField=new JTextField();
+		JTextField stunamefield=new JTextField();
+		JTextField rollnofield=new JTextField();
+		
+		JComboBox<AcademicModel> academicbox=new JComboBox<>();
+		JComboBox<MajorModel> majorbox=new JComboBox<>();
+		
+		String academicid = null;
+		String majorid=null;
+		
+			student.addActionListener(new ActionListener(){
+
+			
+				public void actionPerformed(ActionEvent arg0) {
+					
+					insertdata.removeAll();
+					insertdata.validate();
+					insertdata.repaint();
+				c.add(insertdata,BorderLayout.CENTER);
+				insertdata.setLayout(null);
+				
+				studentIDLabel.setBounds(75,100,90,25);
+				insertdata.add(studentIDLabel);
+				nameLabel.setBounds(75,150,100,25);
+				insertdata.add(nameLabel);
+				rollnolabel.setBounds(75,200,100,25);
+				insertdata.add(rollnolabel);
+				academiclabel.setBounds(75,250,100,25);
+				insertdata.add(academiclabel);
+				majorlabel.setBounds(75,300,100,25);
+				insertdata.add(majorlabel);
+				
+				stuIdField.setBounds(175,100,200,25);
+				insertdata.add(stuIdField);
+				stunamefield.setBounds(175,150,200,25);
+				insertdata.add(stunamefield);
+				rollnofield.setBounds(175,200,200,25);
+				insertdata.add(rollnofield);
+				academicbox.setBounds(175,250,200,25);
+				insertdata.add(academicbox);
+				majorbox.setBounds(175,300,200,25);
+				insertdata.add(majorbox);
+				
+				add.setBounds(70,400,80,20); 
+				insertdata.add(add);
+				add.setFocusable(false);
+				
+				delete.setBounds(185,400,80,20);
+				insertdata.add(delete);
+				delete.setFocusable(false);
+				
+				find.setBounds(295,400,80,20);
+				insertdata.add(find);
+				find.setFocusable(false);
+				
+				
+				try {
+					List<AcademicModel> list=AcademicDA.combo();
+					for(AcademicModel g:list){
+						academicbox.addItem(g);
+					}
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+				try {
+						List<MajorModel> list=MajorDA.majorcombo();
+						for(MajorModel g: list){
+							majorbox.addItem(g);
+						}
+					} catch (SQLException e) {
+						
+						e.printStackTrace();
+					}
+			}
+			
+		});
+	}
+	
+	public void insertSubject(){
+		JLabel code=new JLabel("Subject Code");
+		JLabel name=new JLabel("Subject Name");
+		JLabel cou=new JLabel("Course");
+		JLabel sem=new JLabel("Semester");
+		JLabel maj=new JLabel("Major ID");
+		
+		JTextField codefield=new JTextField();
+		JTextField namefield=new JTextField();
+		JTextField coufield=new JTextField();
+		JTextField semfield=new JTextField();
+		JTextField majfield=new JTextField();
+		
+		JButton b1=new JButton("DELETE");
+		JButton b2=new JButton("INSERT");
+		
+		subject.addActionListener(new ActionListener(){
+
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+				insertdata.removeAll();
+				insertdata.validate();
+				insertdata.repaint();
+				
+				c.add(insertdata,BorderLayout.CENTER);
+				insertdata.setLayout(null);
+				
+				code.setBounds(75,100,90,25);
+				insertdata.add(code);
+				name.setBounds(75,150,90,25);
+				insertdata.add(name);
+				cou.setBounds(75,200,90,25);
+				insertdata.add(cou);
+				sem.setBounds(75,250,90,25);
+				insertdata.add(sem);
+				maj.setBounds(75,300,90,25);
+				insertdata.add(maj);
+				
+				codefield.setBounds(175,100,200,25);
+				insertdata.add(codefield);
+				namefield.setBounds(175,150,200,25);
+				insertdata.add(namefield);
+				coufield.setBounds(175,200,200,25);
+				insertdata.add(coufield);
+				semfield.setBounds(175,250,200,25);
+				insertdata.add(semfield);
+				majfield.setBounds(175,300,200,25);
+				insertdata.add(majfield);
+				
+				b1.setBounds(185,400,80,20);
+				insertdata.add(b1);
+				b1.setFocusable(false);
+				
+				b2.setBounds(295,400,80,20);
+				insertdata.add(b2);
+				b2.setFocusable(false);
+				
+
+				
+			}
+			
+		});
+	}
+	
+	public static void main(String args[])
+	{
+		new Home();
+	}
+	public void actionPerformed(ActionEvent e) {
+		
+		//next button from insert radioButtonMenuItem in Home menu ;
+		if(e.getSource()==next){
+			StudentModel student=new StudentModel();
+			student.setAcademicID(academicfield.getSelectedItem().toString());
+			student.setSemester(semesterfield.getSelectedItem().toString());
+			student.setCourse(coursefield.getSelectedItem().toString());
+			student.setMajorID(majorfield.getSelectedItem().toString());
+			
+			new MarksForm(student);
+			
+		}
+		
+	}
+
+}
