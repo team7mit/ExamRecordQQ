@@ -98,13 +98,13 @@ public static List<StudentModel> insertMark(StudentModel data) throws SQLExcepti
 	
 	conn=Connect.connectDB();
 		
-	String sql1="select distinct Student.Student_Name,Student_RollNo.Roll_No "
-			+ "from student,Student_RollNo "
-			+ "where academic_ID=? "
-			+ "and major_ID=?"
-			+ "and Student_RollNo.Roll_No like ? "
-			+ "and student.student_ID=student_rollno.student_ID "
-			+ "order by Student_RollNo.Roll_No";
+	String sql1="select distinct Student.Student_Name,Student_RollNo.Student_ID,Student_RollNo.Roll_No "
+					+ "from student,Student_RollNo "
+					+ "where academic_ID=? "
+					+ "and major_ID=?"
+					+ "and Student_RollNo.Roll_No like ? "
+					+ "and student.student_ID=student_rollno.student_ID "
+					+ "order by Student_RollNo.Roll_No";
 	
 	PreparedStatement stmt=conn.prepareStatement(sql1);
 	
@@ -121,6 +121,7 @@ public static List<StudentModel> insertMark(StudentModel data) throws SQLExcepti
 	List<StudentModel> studentlist=new ArrayList<StudentModel>();
 	while(res.next()){
 		StudentModel student=new StudentModel();
+		student.setStuid(res.getString("Student_ID"));
 		student.setStuname(res.getString("Student_Name"));
 		student.setRollno(res.getString("Roll_No"));
 		studentlist.add(student);

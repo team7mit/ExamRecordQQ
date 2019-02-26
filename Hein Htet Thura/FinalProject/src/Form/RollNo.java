@@ -11,6 +11,7 @@ import java.util.Vector;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ import DataAccess.MarkDA;
 import DataAccess.ResultDA;
 import DataAccess.SortingExamMark;
 import DataAccess.SortingRollNo;
+import DataAccess.StudentDA;
 import Model.AcademicModel;
 import Model.StudentModel;
 
@@ -42,8 +44,9 @@ public class RollNo extends Home implements ActionListener{
 	public ButtonGroup bg=new ButtonGroup();
 	private JPanel panel;
 	JPanel panel1=new JPanel();
-	static JButton ok=new JButton("OK");
+	static JButton ok=new JButton(" FIND ");
 	static JButton rollnoOK=new JButton("OK");
+	static JButton create=new JButton(" Update New Academic");
 	JMenu file=new JMenu("File");
 	JMenuItem goback=new JMenuItem("Home");
 	//static JButton ok=new JButton("OK");
@@ -69,26 +72,20 @@ public class RollNo extends Home implements ActionListener{
 	
 	
 	table = new JTable(models);
-	Object[] columns={"No","Name"," Previous Roll"," Current Roll"," Marks"};
+	Object[] columns={"No","Student ID"," Previous Roll"," Current Roll"," Marks"};
 	models.setColumnIdentifiers(columns);
-	JScrollPane scrollBar = new JScrollPane(table);
+	scrollBar = new JScrollPane(table);
 	
 
 	
 	panel = new JPanel();
 	panel.add(academicfield);
-	panel.add(majorfield);
-	panel.add(coursefield);
-	panel.add(rollnoOK);
-	frames.add(panel);
-	rollnoOK.addActionListener(new ActionListener() {
-
 	
-		public void actionPerformed(ActionEvent e) {
-			collectRoll();
-		}
-		
-	});
+	panel.add(create);
+	
+	panel.add(new JLabel(" Make Sure New Academic is Created "));
+	frames.add(panel);
+	
 	
 	file.add(goback);
 	mb.add(file);
@@ -97,6 +94,48 @@ public class RollNo extends Home implements ActionListener{
 	panel1.add(oldroll);
 	panel1.add(newrolls);
 	panel1.add(convert);
+	create.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==create) {
+			try {	
+				StudentModel stu=new StudentModel();
+				AcademicModel academicmodel=(AcademicModel) academicfield.getSelectedItem();
+				stu.setAcademicID(academicmodel.academicID);
+				for(int studentCount=0;studentCount< models.getRowCount();studentCount++) {
+					stu.setStuid(models.getValueAt(studentCount,1).toString());
+					stu.setAcademicID(student.getAcademicID());
+					
+					
+						stu.setRollno(models.getValueAt(studentCount,3).toString());
+						boolean check=StudentDA.updateNewStudentForNewAcademic(stu);
+						
+						if(check) {
+							JOptionPane.showMessageDialog(frames, " Students are created", "Success",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else {
+							JOptionPane.showMessageDialog(frames, " Failed", "Failed",JOptionPane.INFORMATION_MESSAGE);
+						}
+						
+					}
+					
+				
+				}
+				
+				catch(NullPointerException e1) {
+						JOptionPane.showMessageDialog(frames, " Convert Roll_No First", "Success",JOptionPane.INFORMATION_MESSAGE);
+					}
+					catch (SQLException e1) {
+						
+						e1.printStackTrace();
+					}
+				
+			}
+			
+		}
+		
+	});
 	convert.addActionListener(new ActionListener() {
 
 		
@@ -104,10 +143,10 @@ public class RollNo extends Home implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getSource()==convert) {
-				AcademicModel academicmodel=(AcademicModel) academicfield.getSelectedItem();
-				student.setAcademicID(academicmodel.academicID);
-				student.setMajorID(majorfield.getSelectedItem().toString());
-				student.setCourse(coursefield.getSelectedItem().toString());
+				//AcademicModel academicmodel=(AcademicModel) academicfield.getSelectedItem();
+				//student.setAcademicID(academicmodel.academicID);
+				//student.setMajorID(majorfield.getSelectedItem().toString());
+				//student.setCourse(coursefield.getSelectedItem().toString());
 				
 				List<StudentModel> rolllist=new ArrayList<StudentModel>();
 				if(models.getRowCount() <= 0) {
@@ -123,7 +162,7 @@ public class RollNo extends Home implements ActionListener{
 						for(int studentCount=0;studentCount < models.getRowCount();studentCount++) {
 							
 							examstudent=new StudentModel();
-							examstudent.setStuname(models.getValueAt(studentCount,1).toString());
+							examstudent.setStuid(models.getValueAt(studentCount,1).toString());
 							examstudent.setAcademicID(student.getAcademicID());
 							examstudent.setRollno(models.getValueAt(studentCount,2).toString());
 							int total=0;
@@ -131,7 +170,7 @@ public class RollNo extends Home implements ActionListener{
 							for(int subject=0;subject<list.size();subject++) {
 								examstudent.setSubcode(list.get(subject));
 								int mark=Integer.parseInt(ResultDA.getAllMarks(examstudent, models));
-								System.out.println(mark+"  EXAM");
+							//	System.out.println(mark+"  EXAM");
 									if( mark  < 40 ) { 
 										fail=true;
 										break;
@@ -192,7 +231,7 @@ public class RollNo extends Home implements ActionListener{
 							rolllist=SortingExamMark.SortStudent(rolllist);
 						}
 						for(StudentModel stu:rolllist) {
-							models.addRow(new Object[] { j++,stu.getStuname(),stu.getRollno(),stu.getNewroll(),stu.getTotal()});
+							models.addRow(new Object[] { j++,stu.getStuid(),stu.getRollno(),stu.getNewroll(),stu.getTotal()});
 						}
 
 					
@@ -249,7 +288,11 @@ public class RollNo extends Home implements ActionListener{
 				ok.addActionListener(new ActionListener(){
 
 					
-					public void actionPerformed(ActionEvent n) {			
+					public void actionPerformed(ActionEvent n) {	
+							AcademicModel academicmodel=(AcademicModel) academicfield.getSelectedItem();
+							student.setAcademicID(academicmodel.academicID);
+							student.setMajorID(majorfield.getSelectedItem().toString());
+							student.setCourse(coursefield.getSelectedItem().toString());
 						new RollNo();
 						
 					}
@@ -268,21 +311,18 @@ public class RollNo extends Home implements ActionListener{
 		}	
 	}
 	public static void collectRoll() {
-		AcademicModel academicmodel=(AcademicModel) academicfield.getSelectedItem();
-		student.setAcademicID(academicmodel.academicID);
-		student.setMajorID(majorfield.getSelectedItem().toString());
-		student.setCourse(coursefield.getSelectedItem().toString());
+		
 		try {
 			models.setRowCount(0);
 			List<StudentModel> list=MarkDA.insertMark(student);
 			
 			int i=1;
 		for(StudentModel student: list){
-			models.addRow(new Object[]{i++,student.getStuname(),student.getRollno()});
+			models.addRow(new Object[]{i++,student.getStuid(),student.getRollno()});
 			
 		}
 		
-		System.out.println(models.getValueAt(0, 1));
+		//System.out.println(models.getValueAt(0, 1));
 		} catch (SQLException e1) {
 
 			e1.printStackTrace();

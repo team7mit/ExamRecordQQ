@@ -13,6 +13,27 @@ public class StudentDA {
 	static Connection conn;
 	static PreparedStatement stmt;
 	
+	
+	public static boolean updateNewStudentForNewAcademic(StudentModel student) throws SQLException{
+		
+		boolean check=false;
+		
+		String roll=student.getRollno();
+		String academic=student.getAcademicID();
+		String id=student.getStuid();
+		
+		
+		conn=Connect.connectDB();
+		String sqls="insert into student_rollno(Roll_No,Student_ID,Academic_ID) values(?,?,?)";	
+		PreparedStatement stmtt=conn.prepareStatement(sqls);
+		stmtt.setString(1,roll);
+		stmtt.setString(2, id);
+		stmtt.setString(3,academic);
+		check=insert(stmtt);
+		Connect.connectionclose(conn);
+		return check ; 
+		
+	}
 	public static boolean insertStudent(StudentModel student) throws SQLException{
 		
 		//Getting values from object
