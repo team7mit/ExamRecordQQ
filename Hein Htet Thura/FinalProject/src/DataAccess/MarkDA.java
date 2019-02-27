@@ -172,7 +172,7 @@ public static List<StudentModel> getReStudent(StudentModel data) throws SQLExcep
 	
 	}
 	List<StudentModel> list=SortingRollNo.SortStudent(studentlist);
-	//System.out.println(list+ " "+academic+" "+" "+major+" "+subject);
+	System.out.println(list+ " "+academic+" "+" "+major+" "+subject);
 	Connect.connectionclose(conn);
 	return list;
 	

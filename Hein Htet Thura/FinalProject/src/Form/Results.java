@@ -180,7 +180,7 @@ public class Results extends Home implements ActionListener{
 					semesterfield.setBounds(175,250,200,25);
 					insertdata.add(semesterfield);
 							
-					nextbut.setBounds(295,350,80,25);
+					nextbut.setBounds(295,350,100,25);
 					insertdata.add(nextbut);
 					Department_And_Subject.addComboBox();
 					nextbut.addActionListener(new ActionListener(){

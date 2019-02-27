@@ -29,14 +29,45 @@ public class ReMarksForm extends dataentry {
 	JPanel panel = new JPanel();
 	JPanel panel1=new JPanel();
 	JButton b=new JButton("OK");
-	JButton a=new JButton("Insert");
+	JButton insertReMarks=new JButton("Insert");
 	DefaultTableModel model=new DefaultTableModel();
 	JTable table=new JTable(model);
 	JScrollPane jsp=new JScrollPane(table);
 	Vector<String> column=new Vector<String>();
-	StudentModel student=new StudentModel();
+	static 	StudentModel student1=new StudentModel();
 	
 	public ReMarksForm() {
+		
+		student1.setAcademicID(student1.getAcademicID());
+		student1.setMajorID(student1.getMajorID());
+		student1.setCourse(student1.getCourse());
+		
+		insertReMarks.addActionListener(new ActionListener() {
+
+			
+			public void actionPerformed(ActionEvent arg0) {
+				if(checkmark(model))
+				{
+					student1.setSubcode(subcodefield.getSelectedItem().toString());
+					try {
+						boolean check=MarkDA.reInsert(model, student1);
+							if(check)
+								JOptionPane.showMessageDialog(frame, "Insert Successfully","Success", JOptionPane.INFORMATION_MESSAGE);
+							else 
+								JOptionPane.showMessageDialog(frame, "Insert Failed Check Again", "Failed", JOptionPane.ERROR_MESSAGE);
+					} catch (SQLException e1) {
+						
+						e1.printStackTrace(); 
+					}		
+				}
+				else {
+					JOptionPane.showMessageDialog(frame, "Insert Failed Check Again", "Failed", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+			
+		});
+		
 		
 		
 	}

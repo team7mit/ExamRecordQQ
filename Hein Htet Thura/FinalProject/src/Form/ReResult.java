@@ -30,7 +30,7 @@ public class ReResult extends Home{
 	static JButton finbut=new JButton("Find");
 	
 	static StudentModel stu=new StudentModel();
-	
+	StudentModel student=new StudentModel();
 	public ReResult() throws SQLException{
 		
 		column.add("No");
@@ -44,10 +44,11 @@ public class ReResult extends Home{
 		
 		JPanel panel = new JPanel();
 		JButton button=new JButton("RESULTS");
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		frame.add(panel, BorderLayout.NORTH);
 		frame.add(scrollPane, BorderLayout.CENTER);
 		
 		panel.add(subcodefield);
+		Department_And_Subject.subjectcode(stu);
 		panel.add(button);
 		
 		button.addActionListener(new ActionListener() {
@@ -57,20 +58,22 @@ public class ReResult extends Home{
 				
 				
 				model.setRowCount(0);
-				StudentModel students=new StudentModel();
+				
 				try {
-					AcademicModel aca=new AcademicModel();
-					aca=(AcademicModel)academicfield.getSelectedItem();
-					students.setMajorID(majorfield.getSelectedItem().toString());
-					students.setAcademicID(aca.academicID);
-					students.setSubcode(subcodefield.getSelectedItem().toString());
-					List<StudentModel> list=MarkDA.getReStudent(students);
+					
+					stu.setSubcode(subcodefield.getSelectedItem().toString());
+					
+					student.setSubcode(stu.getSubcode());
+					student.setAcademicID(stu.getAcademicID());
+					student.setMajorID(stu.getMajorID());
+					List<StudentModel> list=MarkDA.getReStudent(student);
 					int i=1;
 					int j=0;
 					for(StudentModel stu:list) {
 						model.addRow(new Object[] {i++,stu.getStuname(),stu.getRollno()});
-						students.setRollno(stu.getRollno());
-					model.setValueAt(ResultDA.getReExamMarks(students),j++ ,3);	
+						student.setRollno(stu.getRollno());
+						//System.out.println(ResultDA.getReExamMarks(student)+ "GOTCHA");
+						model.setValueAt(ResultDA.getReExamMarks(student),j++ ,3);	
 					}
 				} catch (SQLException e1) {
 					
@@ -205,14 +208,16 @@ public class ReResult extends Home{
 					finbut.setBounds(295,350,80,25);
 					insertdata.add(finbut);
 					
-					StudentModel sm=new StudentModel();
+					
 					Department_And_Subject.addComboBox();
-					Department_And_Subject.subjectcode(sm);
+					
 					finbut.addActionListener(new ActionListener(){
 
 						
 						public void actionPerformed(ActionEvent e) {
 							try {
+								AcademicModel academicmodel=(AcademicModel) academicfield.getSelectedItem();
+								stu.setAcademicID(academicmodel.academicID);
 								stu.setCourse(coursefield.getSelectedItem().toString());
 								stu.setSemester(semesterfield.getSelectedItem().toString());
 								stu.setMajorID(majorfield.getSelectedItem().toString());

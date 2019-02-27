@@ -47,7 +47,7 @@ JMenuBar mb=new JMenuBar();
 	JMenu file=new JMenu("File");
 	JMenu New=new JMenu("New");
 	
-	JMenuItem exit=new JMenuItem("Exit");
+	JMenuItem exit=new JMenuItem("Log Out");
 	static JMenuItem academic=new JMenuItem("Academic");
 	static JMenuItem student=new JMenuItem("Student");
 	static JMenuItem subject=new JMenuItem("Subject");
@@ -134,7 +134,9 @@ JMenuBar mb=new JMenuBar();
 
 			
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+				JOptionPane.showMessageDialog(c," GOOOD BYE !!!!" );
+				c.dispose();
+				new LoginPage();
 				
 			}
 			

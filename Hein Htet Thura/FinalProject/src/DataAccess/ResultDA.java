@@ -27,7 +27,7 @@ public class ResultDA {
 		String academic=student.getAcademicID();
 		String subject=student.getSubcode();
 		
-
+//System.out.println(roll + academic + subject +"LEGENGS");
 		conn=Connect.connectDB();
 	
 		String sql="select ReExam from marks"

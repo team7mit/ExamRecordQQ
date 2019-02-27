@@ -64,7 +64,7 @@ public class RollNo extends Home implements ActionListener{
 	}
 */	public RollNo() {
 	frames = new JFrame();
-	frames.setBounds(100, 100, 450, 300);
+	frames.setBounds(100, 100, 450,300);
 	frames.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 	bg.add(oldroll);
@@ -282,7 +282,7 @@ public class RollNo extends Home implements ActionListener{
 				coursefield.setBounds(150,150,150,25);
 				insertdata.add(coursefield);
 				
-				ok.setBounds(100,300,150,30);
+				ok.setBounds(100,200,150,30);
 				insertdata.add(ok);
 				Department_And_Subject.addComboBox();
 				ok.addActionListener(new ActionListener(){
